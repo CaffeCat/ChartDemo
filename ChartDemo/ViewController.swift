@@ -184,7 +184,7 @@ class ViewController: UIViewController, ChartViewDelegate {
         candleStickChartView.frame = CGRect.init(x: 10, y: 50, width: self.view.bounds.width-20, height: 300)
         
         //第一组烛形图的10条随机数据
-        let dataEntries1 = (0..<100).map { (i) -> CandleChartDataEntry in
+        let dataEntries1 = (0..<10).map { (i) -> CandleChartDataEntry in
             let val = Double(arc4random_uniform(40) + 10)
             let high = Double(arc4random_uniform(9) + 8)
             let low = Double(arc4random_uniform(9) + 8)
@@ -223,11 +223,13 @@ class ViewController: UIViewController, ChartViewDelegate {
         candleStickChartView.xAxis.granularity = 1
         candleStickChartView.xAxis.granularityEnabled = true
         candleStickChartView.xAxis.labelCount = 10
+        candleStickChartView.setScaleMinima(1, scaleY: 1)
+        candleStickChartView.xAxis.spaceMax = 1
         
         candleStickChartView.rightAxis.drawLabelsEnabled = false
         candleStickChartView.leftAxis.labelCount = 10
-        
-        candleStickChartView.setVisibleXRangeMaximum(20)
+        candleStickChartView.setVisibleXRangeMinimum(15)
+//        candleStickChartView.setVisibleXRangeMaximum(20)
         
         self.view.addSubview(candleStickChartView)
     }
