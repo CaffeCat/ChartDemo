@@ -22,16 +22,18 @@ import Charts
 class ViewController: UIViewController, ChartViewDelegate {
     
     var lineChartView: LineChartView!//折线图
+    var candleStickChartView: CandleStickChartView!//蜡烛图
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setUpLineChartView()
+//        self.setUpLineChartView()
+        self.setUpCandleStickChartView()
     }
 
     func setUpLineChartView() {
         lineChartView = LineChartView()
         lineChartView.delegate = self
-        lineChartView.frame = CGRect.init(x: 10, y: 100, width: self.view.bounds.width - 20, height: 300)
+        lineChartView.frame = CGRect.init(x: 10, y: 30, width: self.view.bounds.width - 20, height: 300)
         
         //创建50个随机数据
         var dataEntries = [ChartDataEntry]()
@@ -63,10 +65,11 @@ class ViewController: UIViewController, ChartViewDelegate {
         
         //使用虚线显示, 设置各段长度
         chartDataSet.lineDashLengths = [4, 2]
+        chartDataSet.lineWidth = 3
         
         //折线的线条模式
         //chartDataSet.mode = .linear //直线连接, 默认
-        chartDataSet.mode = .cubicBezier //贝塞尔曲线
+        chartDataSet.mode = .horizontalBezier //贝塞尔曲线
         
         //绘制填充色背景
         chartDataSet.drawFilledEnabled = true
@@ -75,7 +78,7 @@ class ViewController: UIViewController, ChartViewDelegate {
         
         //十字线样式
         chartDataSet.highlightColor = .yellow
-        chartDataSet.highlightLineWidth = 3
+        chartDataSet.highlightLineWidth = 1
         chartDataSet.highlightLineDashLengths = [4, 2]
         
         //折线图包含一根折线
@@ -114,20 +117,20 @@ class ViewController: UIViewController, ChartViewDelegate {
         
         //设置X轴显示样式
         lineChartView.xAxis.labelPosition = .bottom//在下方显示
-        lineChartView.xAxis.axisMinimum = 0 //最小刻度
-        lineChartView.xAxis.axisMaximum = 120
+        lineChartView.xAxis.axisMinimum = lineChartView.data?.xMin ?? 0
+        lineChartView.xAxis.axisMaximum = (lineChartView.data?.xMax ?? 0) + 1
         lineChartView.xAxis.granularity = 0.5 //最小间隔
         lineChartView.xAxis.labelTextColor = .black
         lineChartView.xAxis.labelFont = .systemFont(ofSize: 12)
         lineChartView.xAxis.labelRotationAngle = -30
         
         //设置Y轴显示样式, 左侧Y轴为leftAxis、右侧Y轴为rightAxis
-        lineChartView.leftAxis.axisMinimum = -10
-        lineChartView.leftAxis.axisMaximum = 120
+        lineChartView.leftAxis.axisMinimum = lineChartView.data?.yMin ?? 0
+        lineChartView.leftAxis.axisMaximum = (lineChartView.data?.yMax ?? 10) + 10
         lineChartView.leftAxis.granularity = 1
         lineChartView.leftAxis.drawZeroLineEnabled = true //绘制0刻度线
         lineChartView.leftAxis.zeroLineColor = .red
-        lineChartView.leftAxis.zeroLineWidth = 3
+        lineChartView.leftAxis.zeroLineWidth = 1
         lineChartView.leftAxis.zeroLineDashLengths = [4, 2]
         
         //绘制限制线或警戒线
@@ -138,17 +141,91 @@ class ViewController: UIViewController, ChartViewDelegate {
         limitLine1.labelPosition = .topLeft//标示位置
         limitLine1.drawLabelEnabled = false//是否显示标示
         limitLine1.lineColor = .brown//线条颜色
-        limitLine1.lineWidth = 3
+        limitLine1.lineWidth = 1
+        limitLine2.lineWidth = 1
         lineChartView.leftAxis.addLimitLine(limitLine1)
         lineChartView.leftAxis.addLimitLine(limitLine2)
         lineChartView.leftAxis.drawLimitLinesBehindDataEnabled = true//将限制线绘制在折线后面
         
+//        lineChartView.setVisibleXRangeMaximum(20)
+//        var xvalue = lineChartView.data?.xMax ?? 0
+//        xvalue -= 33
+//        lineChartView.moveViewToX(xvalue)
+//        print("\(String(describing: xvalue))")
+        
+        //开场动画
+        lineChartView.animate(xAxisDuration: 1)
+        
         self.view.addSubview(lineChartView)
-        print("绘制折线图")
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        print("选中了一个数据")
+        print("选中了一个数据: [\(entry.x), \(entry.y)]")
+        self.showMarkerView(entry: entry, chartView)
+        //lineChartView.moveViewToAnimated(xValue: entry.x - 10, yValue: 0, axis: .left, duration: 0.1)
+    }
+    
+    func showMarkerView(entry: ChartDataEntry, _ chartView: ChartViewBase) -> Void {
+        let marker = MarkerView.init(frame: CGRect(x: 20, y: 20, width: 80, height: 20))
+        marker.chartView = lineChartView
+        marker.offset = CGPoint.init(x: 5, y: -marker.frame.height-5)
+        let valueLB = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 80, height: 20))
+        valueLB.text = "数据:\(entry.y)"
+        valueLB.textColor = .red
+        valueLB.font = .systemFont(ofSize: 12)
+        valueLB.backgroundColor = .gray
+        valueLB.textAlignment = .center
+        marker.addSubview(valueLB)
+        chartView.marker = marker
+    }
+    
+    func setUpCandleStickChartView() {
+        candleStickChartView = CandleStickChartView()
+        candleStickChartView.frame = CGRect.init(x: 10, y: 50, width: self.view.bounds.width-20, height: 300)
+        
+        candleStickChartView.delegate = self
+        candleStickChartView.backgroundColor = .lightText
+        candleStickChartView.chartDescription?.text = "K线图"
+        candleStickChartView.chartDescription?.textColor = .red
+        candleStickChartView.doubleTapToZoomEnabled = false
+        candleStickChartView.borderColor = .clear
+        candleStickChartView.scaleYEnabled = false
+        candleStickChartView.drawGridBackgroundEnabled = false
+        candleStickChartView.drawBordersEnabled = false
+        candleStickChartView.gridBackgroundColor = .clear
+        candleStickChartView.borderColor = .clear
+        
+        candleStickChartView.xAxis.labelPosition = .bothSided
+        candleStickChartView.xAxis.drawAxisLineEnabled = true
+        candleStickChartView.xAxis.drawGridLinesEnabled = false
+        candleStickChartView.xAxis.forceLabelsEnabled = true
+        
+        candleStickChartView.rightAxis.drawLabelsEnabled = false
+        candleStickChartView.leftAxis.labelCount = 10
+        
+        
+        //第一组烛形图的10条随机数据
+        let dataEntries1 = (0..<20).map { (i) -> CandleChartDataEntry in
+            let val = Double(arc4random_uniform(40) + 10)
+            let high = Double(arc4random_uniform(9) + 8)
+            let low = Double(arc4random_uniform(9) + 8)
+            let open = Double(arc4random_uniform(6) + 1)
+            let close = Double(arc4random_uniform(6) + 1)
+            let even = arc4random_uniform(2) % 2 == 0 //true表示开盘价高于收盘价
+            return CandleChartDataEntry(x: Double(i),
+                                        shadowH: val + high,
+                                        shadowL: val - low,
+                                        open: even ? val + open : val - open,
+                                        close: even ? val - close : val + close)
+        }
+        let chartDataSet1 = CandleChartDataSet(entries: dataEntries1, label: "图例1")
+        
+        //目前烛形图包括1组数据
+        let chartData = CandleChartData(dataSets: [chartDataSet1])
+        
+        candleStickChartView.data = chartData
+        
+        self.view.addSubview(candleStickChartView)
     }
 }
 
