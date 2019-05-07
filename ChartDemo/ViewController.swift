@@ -183,29 +183,8 @@ class ViewController: UIViewController, ChartViewDelegate {
         candleStickChartView = CandleStickChartView()
         candleStickChartView.frame = CGRect.init(x: 10, y: 50, width: self.view.bounds.width-20, height: 300)
         
-        candleStickChartView.delegate = self
-        candleStickChartView.backgroundColor = .lightText
-        candleStickChartView.chartDescription?.text = "K线图"
-        candleStickChartView.chartDescription?.textColor = .red
-        candleStickChartView.doubleTapToZoomEnabled = false
-        candleStickChartView.borderColor = .clear
-        candleStickChartView.scaleYEnabled = false
-        candleStickChartView.drawGridBackgroundEnabled = false
-        candleStickChartView.drawBordersEnabled = false
-        candleStickChartView.gridBackgroundColor = .clear
-        candleStickChartView.borderColor = .clear
-        
-        candleStickChartView.xAxis.labelPosition = .bothSided
-        candleStickChartView.xAxis.drawAxisLineEnabled = true
-        candleStickChartView.xAxis.drawGridLinesEnabled = false
-        candleStickChartView.xAxis.forceLabelsEnabled = true
-        
-        candleStickChartView.rightAxis.drawLabelsEnabled = false
-        candleStickChartView.leftAxis.labelCount = 10
-        
-        
         //第一组烛形图的10条随机数据
-        let dataEntries1 = (0..<20).map { (i) -> CandleChartDataEntry in
+        let dataEntries1 = (0..<100).map { (i) -> CandleChartDataEntry in
             let val = Double(arc4random_uniform(40) + 10)
             let high = Double(arc4random_uniform(9) + 8)
             let low = Double(arc4random_uniform(9) + 8)
@@ -224,6 +203,31 @@ class ViewController: UIViewController, ChartViewDelegate {
         let chartData = CandleChartData(dataSets: [chartDataSet1])
         
         candleStickChartView.data = chartData
+        
+        candleStickChartView.delegate = self
+        candleStickChartView.backgroundColor = .lightText
+        candleStickChartView.chartDescription?.text = "K线图"
+        candleStickChartView.chartDescription?.textColor = .red
+        candleStickChartView.doubleTapToZoomEnabled = false
+        candleStickChartView.borderColor = .clear
+        candleStickChartView.scaleYEnabled = false
+        candleStickChartView.drawGridBackgroundEnabled = false
+        candleStickChartView.drawBordersEnabled = false
+        candleStickChartView.gridBackgroundColor = .clear
+        candleStickChartView.borderColor = .clear
+        
+        candleStickChartView.xAxis.labelPosition = .bottom
+        candleStickChartView.xAxis.drawAxisLineEnabled = true
+        candleStickChartView.xAxis.drawGridLinesEnabled = false
+        candleStickChartView.xAxis.forceLabelsEnabled = true
+        candleStickChartView.xAxis.granularity = 1
+        candleStickChartView.xAxis.granularityEnabled = true
+        candleStickChartView.xAxis.labelCount = 10
+        
+        candleStickChartView.rightAxis.drawLabelsEnabled = false
+        candleStickChartView.leftAxis.labelCount = 10
+        
+        candleStickChartView.setVisibleXRangeMaximum(20)
         
         self.view.addSubview(candleStickChartView)
     }
