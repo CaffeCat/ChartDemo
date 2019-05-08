@@ -183,21 +183,28 @@ class ViewController: UIViewController, ChartViewDelegate {
         candleStickChartView = CandleStickChartView()
         candleStickChartView.frame = CGRect.init(x: 10, y: 50, width: self.view.bounds.width-20, height: 300)
         
-        //第一组烛形图的10条随机数据
-        let dataEntries1 = (0..<10).map { (i) -> CandleChartDataEntry in
+        //第一组烛形图的随机数据
+        let dataEntries1 = (0..<100).map { (i) -> CandleChartDataEntry in
             let val = Double(arc4random_uniform(40) + 10)
             let high = Double(arc4random_uniform(9) + 8)
             let low = Double(arc4random_uniform(9) + 8)
             let open = Double(arc4random_uniform(6) + 1)
             let close = Double(arc4random_uniform(6) + 1)
             let even = arc4random_uniform(2) % 2 == 0 //true表示开盘价高于收盘价
-            return CandleChartDataEntry(x: Double(i),
+            return CandleChartDataEntry.init(x: Double(i),
                                         shadowH: val + high,
                                         shadowL: val - low,
                                         open: even ? val + open : val - open,
-                                        close: even ? val - close : val + close)
+                                        close: even ? val - close : val + close,
+                                        data: "1000")
         }
         let chartDataSet1 = CandleChartDataSet(entries: dataEntries1, label: "图例1")
+        chartDataSet1.drawValuesEnabled = false
+        chartDataSet1.increasingColor = #colorLiteral(red: 0, green: 0.5603182912, blue: 0, alpha: 0.9112799658)
+        chartDataSet1.increasingFilled = true
+        chartDataSet1.decreasingColor = .red
+        chartDataSet1.decreasingFilled = false
+        chartDataSet1.shadowColorSameAsCandle = true
         
         //目前烛形图包括1组数据
         let chartData = CandleChartData(dataSets: [chartDataSet1])
@@ -219,7 +226,7 @@ class ViewController: UIViewController, ChartViewDelegate {
         candleStickChartView.xAxis.labelPosition = .bottom
         candleStickChartView.xAxis.drawAxisLineEnabled = true
         candleStickChartView.xAxis.drawGridLinesEnabled = false
-        candleStickChartView.xAxis.forceLabelsEnabled = true
+        candleStickChartView.xAxis.forceLabelsEnabled = false
         candleStickChartView.xAxis.granularity = 1
         candleStickChartView.xAxis.granularityEnabled = true
         candleStickChartView.xAxis.labelCount = 10
@@ -229,7 +236,7 @@ class ViewController: UIViewController, ChartViewDelegate {
         candleStickChartView.rightAxis.drawLabelsEnabled = false
         candleStickChartView.leftAxis.labelCount = 10
         candleStickChartView.setVisibleXRangeMinimum(15)
-//        candleStickChartView.setVisibleXRangeMaximum(20)
+        candleStickChartView.setVisibleXRangeMaximum(30)
         
         self.view.addSubview(candleStickChartView)
     }
