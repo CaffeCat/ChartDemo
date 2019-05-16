@@ -60,6 +60,7 @@
 		89629D722275EEC2002175A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE97E958C7DC9C789A12B3CB /* Pods-ChartDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChartDemo.debug.xcconfig"; path = "Target Support Files/Pods-ChartDemo/Pods-ChartDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		CA758DCEF8CCBA46F40A2D16 /* Pods_ChartDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChartDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4094246228D63AF00AC05BE /* TushareProManager.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TushareProManager.md; sourceTree = "<group>"; };
 		FA3B7C6278F3017C50537D3F /* Pods-ChartDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChartDemoTests.release.xcconfig"; path = "Target Support Files/Pods-ChartDemoTests/Pods-ChartDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +107,7 @@
 		89629D442275EEC0002175A7 = {
 			isa = PBXGroup;
 			children = (
+				D4094245228D635600AC05BE /* TushareProManager */,
 				89629D4F2275EEC1002175A7 /* ChartDemo */,
 				89629D642275EEC2002175A7 /* ChartDemoTests */,
 				89629D6F2275EEC2002175A7 /* ChartDemoUITests */,
@@ -156,6 +158,14 @@
 			path = ChartDemoUITests;
 			sourceTree = "<group>";
 		};
+		D4094245228D635600AC05BE /* TushareProManager */ = {
+			isa = PBXGroup;
+			children = (
+				D4094246228D63AF00AC05BE /* TushareProManager.md */,
+			);
+			path = TushareProManager;
+			sourceTree = "<group>";
+		};
 		FF446F60E0F99AB0F2D05C0F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,7 +190,7 @@
 				89629D492275EEC1002175A7 /* Sources */,
 				89629D4A2275EEC1002175A7 /* Frameworks */,
 				89629D4B2275EEC1002175A7 /* Resources */,
-				D1A2B5A95D82DFF1AEB6C090 /* [CP] Embed Pods Frameworks */,
+				B5B7E40FED4B93F265BB4115 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -199,6 +209,7 @@
 				89629D5D2275EEC2002175A7 /* Sources */,
 				89629D5E2275EEC2002175A7 /* Frameworks */,
 				89629D5F2275EEC2002175A7 /* Resources */,
+				BCBBC2308AE7583090BD8E45 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -218,6 +229,7 @@
 				89629D682275EEC2002175A7 /* Sources */,
 				89629D692275EEC2002175A7 /* Frameworks */,
 				89629D6A2275EEC2002175A7 /* Resources */,
+				CD139AD2EA7BFB55D514D9C9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -344,7 +356,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D1A2B5A95D82DFF1AEB6C090 /* [CP] Embed Pods Frameworks */ = {
+		B5B7E40FED4B93F265BB4115 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -359,6 +371,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChartDemo/Pods-ChartDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BCBBC2308AE7583090BD8E45 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChartDemoTests/Pods-ChartDemoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChartDemoTests/Pods-ChartDemoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChartDemoTests/Pods-ChartDemoTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CD139AD2EA7BFB55D514D9C9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChartDemoUITests/Pods-ChartDemoUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChartDemoUITests/Pods-ChartDemoUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChartDemoUITests/Pods-ChartDemoUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F62C0BCC116D92D1E80F1B10 /* [CP] Check Pods Manifest.lock */ = {
@@ -568,7 +614,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VTK2KVKN72;
+				DEVELOPMENT_TEAM = TFN6MQ6M96;
 				INFOPLIST_FILE = ChartDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -587,7 +633,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VTK2KVKN72;
+				DEVELOPMENT_TEAM = TFN6MQ6M96;
 				INFOPLIST_FILE = ChartDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -607,7 +653,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VTK2KVKN72;
+				DEVELOPMENT_TEAM = TFN6MQ6M96;
 				INFOPLIST_FILE = ChartDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -629,7 +675,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VTK2KVKN72;
+				DEVELOPMENT_TEAM = TFN6MQ6M96;
 				INFOPLIST_FILE = ChartDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -650,7 +696,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VTK2KVKN72;
+				DEVELOPMENT_TEAM = TFN6MQ6M96;
 				INFOPLIST_FILE = ChartDemoUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -671,7 +717,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VTK2KVKN72;
+				DEVELOPMENT_TEAM = TFN6MQ6M96;
 				INFOPLIST_FILE = ChartDemoUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
