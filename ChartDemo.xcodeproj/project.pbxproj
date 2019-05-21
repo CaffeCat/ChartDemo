@@ -18,6 +18,12 @@
 		89629D662275EEC2002175A7 /* ChartDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89629D652275EEC2002175A7 /* ChartDemoTests.swift */; };
 		89629D712275EEC2002175A7 /* ChartDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89629D702275EEC2002175A7 /* ChartDemoUITests.swift */; };
 		8F02062B872E2A063C8F3107 /* Pods_ChartDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA758DCEF8CCBA46F40A2D16 /* Pods_ChartDemoUITests.framework */; };
+		D4174A8822939BBF00696DBC /* TushareConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4174A8722939BBF00696DBC /* TushareConstants.swift */; };
+		D4174A8922939BBF00696DBC /* TushareConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4174A8722939BBF00696DBC /* TushareConstants.swift */; };
+		D4174A8A22939BBF00696DBC /* TushareConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4174A8722939BBF00696DBC /* TushareConstants.swift */; };
+		D4174A8C22939E3600696DBC /* TushareProManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4174A8B22939E3600696DBC /* TushareProManager.swift */; };
+		D4174A8D22939E3600696DBC /* TushareProManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4174A8B22939E3600696DBC /* TushareProManager.swift */; };
+		D4174A8E22939E3600696DBC /* TushareProManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4174A8B22939E3600696DBC /* TushareProManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +67,8 @@
 		AE97E958C7DC9C789A12B3CB /* Pods-ChartDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChartDemo.debug.xcconfig"; path = "Target Support Files/Pods-ChartDemo/Pods-ChartDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		CA758DCEF8CCBA46F40A2D16 /* Pods_ChartDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChartDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4094246228D63AF00AC05BE /* TushareProManager.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TushareProManager.md; sourceTree = "<group>"; };
+		D4174A8722939BBF00696DBC /* TushareConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TushareConstants.swift; sourceTree = "<group>"; };
+		D4174A8B22939E3600696DBC /* TushareProManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TushareProManager.swift; sourceTree = "<group>"; };
 		FA3B7C6278F3017C50537D3F /* Pods-ChartDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChartDemoTests.release.xcconfig"; path = "Target Support Files/Pods-ChartDemoTests/Pods-ChartDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,6 +170,8 @@
 			isa = PBXGroup;
 			children = (
 				D4094246228D63AF00AC05BE /* TushareProManager.md */,
+				D4174A8722939BBF00696DBC /* TushareConstants.swift */,
+				D4174A8B22939E3600696DBC /* TushareProManager.swift */,
 			);
 			path = TushareProManager;
 			sourceTree = "<group>";
@@ -437,6 +447,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				89629D532275EEC1002175A7 /* ViewController.swift in Sources */,
+				D4174A8822939BBF00696DBC /* TushareConstants.swift in Sources */,
+				D4174A8C22939E3600696DBC /* TushareProManager.swift in Sources */,
 				89629D512275EEC1002175A7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,6 +457,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4174A8922939BBF00696DBC /* TushareConstants.swift in Sources */,
+				D4174A8D22939E3600696DBC /* TushareProManager.swift in Sources */,
 				89629D662275EEC2002175A7 /* ChartDemoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,6 +467,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4174A8A22939BBF00696DBC /* TushareConstants.swift in Sources */,
+				D4174A8E22939E3600696DBC /* TushareProManager.swift in Sources */,
 				89629D712275EEC2002175A7 /* ChartDemoUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

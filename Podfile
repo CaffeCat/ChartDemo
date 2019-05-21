@@ -6,7 +6,7 @@ target 'ChartDemo' do
   use_frameworks!
   pod 'Charts'
   pod 'RealmSwift'
-  pod 'Alamofire', '~> 5.0.0-beta.6'
+  pod 'Alamofire' #, '~> 5.0.0-beta.6'
   # Pods for ChartDemo
 
   target 'ChartDemoTests' do
@@ -14,7 +14,7 @@ target 'ChartDemo' do
     use_frameworks!
     pod 'Charts'
     pod 'RealmSwift'
-    pod 'Alamofire', '~> 5.0.0-beta.6'
+    pod 'Alamofire' #, '~> 5.0.0-beta.6'
     # Pods for testing
   end
 
@@ -23,7 +23,7 @@ target 'ChartDemo' do
     use_frameworks!
     pod 'Charts'
     pod 'RealmSwift'
-    pod 'Alamofire', '~> 5.0.0-beta.6'
+    pod 'Alamofire' #, '~> 5.0.0-beta.6'
     # Pods for testing
   end
 

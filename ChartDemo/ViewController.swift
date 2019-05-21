@@ -28,6 +28,10 @@ class ViewController: UIViewController, ChartViewDelegate {
         super.viewDidLoad()
 //        self.setUpLineChartView()
         self.setUpCandleStickChartView()
+        
+        DispatchQueue.global().async {
+            TushareProManager.fetchData(type: .TushareProStockList)
+        }
     }
 
     func setUpLineChartView() {
