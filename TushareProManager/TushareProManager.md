@@ -4,7 +4,19 @@
             邮箱: 1285906550@qq.com
         }
         参见 TusharePro 中数据接口简介: <#https://tushare.pro/document/2?doc_id=14#> 可以知道基本使用方法{
-            
+            http获取数据使用方式{
+                输入参数{
+                <#api_name#>：接口名称，比如stock_basic
+                <#token#> ：用户唯一标识，可通过登录pro网站获取
+                <#params#>：接口参数，如daily接口中start_date和end_date
+                <#fields#>：字段列表，用于接口获取指定的字段，以逗号分隔，如"open,high,low,close"
+                }
+                输出参数{
+                <#code#>： 接口返回码，2002表示权限问题。
+                <#msg#>：错误信息，比如“系统内部错误”，“没有权限”等
+                <#data#>：数据，data里包含fields和items字段，分别为字段和数据内容
+                }
+            }
         }
 }
     
