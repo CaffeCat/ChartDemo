@@ -30,7 +30,9 @@ class ViewController: UIViewController, ChartViewDelegate {
         self.setUpCandleStickChartView()
         
         DispatchQueue.global().async {
-            TushareProManager.fetchData(type: .TushareProStockList)
+//            _ = TushareProManager.fetchData(type: .TushareProStockList)
+//            _ = TushareProManager.fetchData(type: .TushareProTradeCalendar)
+            _ = TushareProManager.fetchData(type: .TushareProStockCompany)
         }
     }
 
