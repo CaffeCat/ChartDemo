@@ -18,5 +18,6 @@ enum TushareProAPI {
 class TushareProRequestData {
     var api: TushareProAPI!
     var params: Dictionary<String, Any>!
+    var needSyncToDatabase: Bool!
 }
 
