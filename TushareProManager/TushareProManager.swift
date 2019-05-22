@@ -23,7 +23,7 @@ let TUSHARE_PRO_TOKEN = "126d508b79bd6c2b84056872baefbe8c0731b71b15beed527d7cdbb
 class TushareProManager {
     
     //MARK: - 这是类方法入口, 用于请求TusharePro所有数据
-    class func fetchData(type: TushareProAPI, dict: Dictionary<String, Any>) -> Bool {
+    class func fetchData(type: TushareProAPI, requestData: TushareProRequestData? = nil) -> Bool {
         print(#function , " 进入时间 : \(Date.timeIntervalSinceReferenceDate)")
         var result = false
         //设置同步信号量
@@ -62,6 +62,39 @@ class TushareProManager {
         return result
     }
     
+    // MARK: - 公共函数列表
+    
+    // MARK: 通用数据解析
+    private class func parseDataFromTusharePro(data: Data) {
+        
+        if let dict  = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers){
+            let json = dict as! Dictionary<String, Any>
+            let request_id = json["request_id"] as! String
+            let code = json["code"] as! Int
+            let msg = json["msg"] as? String   //这个值可能为空
+            print("request_id:", request_id, " code:", code, "msg:", msg as Any)
+            
+            if let data = json["data"] as? Dictionary<String, Any> {
+                
+                if let fields = data["fields"] as? Array<String> {
+                    //TODO: 可能需要写入数据库前进行字段对比
+                    // 这里拿到 TusharePro 返回的字段列表
+                    print("fields:", fields)
+                }
+                
+                if let items = data["items"] as? Array<Any> {
+                    for item in items {
+                        if let content = item as? Array<Any> {
+                            //TODO: 可能需要将数据写入数据库
+                            // 这里拿到 TusharePro 返回的数据
+                            print(content)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     // MARK: - 内部私有获取数据方法
     
     // MARK: 获取股票列表
@@ -93,11 +126,7 @@ class TushareProManager {
                                     semaphore.signal()
                                     print("数据响应: \(String(describing: response.data))")
                                     if let data = response.data {
-                                        if let dict  = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) {
-                                            let json = dict as! Dictionary<String, Any>
-                                            let request_id = json["request_id"] as! String
-                                            print("request_id: \(String(describing: request_id))")
-                                        }
+                                        self.parseDataFromTusharePro(data: data)
                                     }
                                 }
             }
@@ -143,11 +172,7 @@ class TushareProManager {
                                     semaphore.signal()
                                     print("数据响应: \(String(describing: response.data))")
                                     if let data = response.data {
-                                        if let dict  = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) {
-                                            let json = dict as! Dictionary<String, Any>
-                                            let request_id = json["request_id"] as! String
-                                            print("request_id: \(String(describing: request_id))")
-                                        }
+                                        self.parseDataFromTusharePro(data: data)
                                     }
                                 }
             }
@@ -192,11 +217,7 @@ class TushareProManager {
                                     semaphore.signal()
                                     print("数据响应: \(String(describing: response.data))")
                                     if let data = response.data {
-                                        if let dict  = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) {
-                                            let json = dict as! Dictionary<String, Any>
-                                            let request_id = json["request_id"] as! String
-                                            print("request_id: \(String(describing: request_id))")
-                                        }
+                                        self.parseDataFromTusharePro(data: data)
                                     }
                                 }
             }
@@ -241,11 +262,7 @@ class TushareProManager {
                                     semaphore.signal()
                                     print("数据响应: \(String(describing: response.data))")
                                     if let data = response.data {
-                                        if let dict  = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) {
-                                            let json = dict as! Dictionary<String, Any>
-                                            let request_id = json["request_id"] as! String
-                                            print("request_id: \(String(describing: request_id))")
-                                        }
+                                        self.parseDataFromTusharePro(data: data)
                                     }
                                 }
             }
