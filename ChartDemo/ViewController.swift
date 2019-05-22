@@ -33,7 +33,7 @@ class ViewController: UIViewController, ChartViewDelegate {
 //            _ = TushareProManager.fetchData(type: .TushareProStockList)
 //            _ = TushareProManager.fetchData(type: .TushareProTradeCalendar)
 //            _ = TushareProManager.fetchData(type: .TushareProStockCompany, requestData: nil)
-            _ = TushareProManager.fetchData(type: .TushareProHistoryName)
+//            _ = TushareProManager.fetchData(type: .TushareProHistoryName)
         }
     }
 
