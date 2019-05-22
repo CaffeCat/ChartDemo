@@ -52,6 +52,16 @@ class TushareProManager {
                 result = self.fetchHistoryName()
                 semaphore.signal()
                 
+            case .TushareProConstituentStocksOfHS:
+                
+                result = self.fetchConstituentStocksOfHS()
+                semaphore.signal()
+                
+            case .TushareProNewShareStocks:
+                
+                result = self.fetchNewShareStocks()
+                semaphore.signal()
+                
             default:
                 
                 //TODO: need to do something.
@@ -145,7 +155,7 @@ class TushareProManager {
     
     // MARK: - 内部私有获取数据方法
     
-    // MARK: 获取股票列表
+    // MARK: 股票列表
     private class func fetchStockList() -> Bool{
         
         //配置请求参数
@@ -165,7 +175,7 @@ class TushareProManager {
         return self.getDataFromTusharePro(request: request)
     }
     
-    //MARK: 获取股票交易日历
+    //MARK: 股票交易日历
     private class func fetchTradeCalendar() -> Bool {
         
         //配置请求参数
@@ -185,7 +195,7 @@ class TushareProManager {
         return self.getDataFromTusharePro(request: request)
     }
     
-    //MARK: 获取上市公司基础信息
+    //MARK: 上市公司基础信息
     private class func fetchStockCompany() -> Bool {
         
         //配置请求参数
@@ -205,7 +215,7 @@ class TushareProManager {
         return self.getDataFromTusharePro(request: request)
     }
     
-    //MARK: 获取公司名称变更记录
+    //MARK: 公司名称变更记录
     private class func fetchHistoryName() -> Bool {
         
         //配置请求参数
@@ -224,4 +234,45 @@ class TushareProManager {
         
         return self.getDataFromTusharePro(request: request)
     }
+    
+    //MARK: 沪股通或深股通成分股数据
+    private class func fetchConstituentStocksOfHS() -> Bool {
+        
+        //配置请求参数
+        let tushareProURL = URL.init(string: TUSHARE_PRO_URL)!
+        let api = "hs_const"
+        let fields = "ts_code, hs_type, in_date, out_date, is_new"
+        let params = ["hs_type": "SH"] // ["hs_type": "SZ"]
+        
+        let request = TushareProRequestData.init()
+        request.apiName = .TushareProStockList
+        request.api = api
+        request.apiURL = tushareProURL
+        request.fields = fields
+        request.params = params
+        request.needSyncToDatabase = false
+        
+        return self.getDataFromTusharePro(request: request)
+    }
+    
+    //MARK: IPO新股列表
+    private class func fetchNewShareStocks() -> Bool {
+        
+        //配置请求参数
+        let tushareProURL = URL.init(string: TUSHARE_PRO_URL)!
+        let api = "new_share"
+        let fields = "ts_code, sub_code, name, ipo_date, issue_date, amount, market_amount, price, pe, limit_amount, funds, ballot"
+        let params = ["": ""] // ["hs_type": "SZ"]
+        
+        let request = TushareProRequestData.init()
+        request.apiName = .TushareProStockList
+        request.api = api
+        request.apiURL = tushareProURL
+        request.fields = fields
+        request.params = params
+        request.needSyncToDatabase = false
+        
+        return self.getDataFromTusharePro(request: request)
+    }
+    
 }
