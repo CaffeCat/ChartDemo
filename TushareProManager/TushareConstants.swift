@@ -18,8 +18,15 @@ enum TushareProAPI {
 
 // MARK: 获取 TusharePro 数据的请求参数
 class TushareProRequestData {
-    var api: TushareProAPI!
-    var params: Dictionary<String, Any>!
+    
+    // 接口名称
+    var apiName: TushareProAPI!
+    // 参数设置
+    var api: String!
+    var apiURL: URL!
+    var fields: String!
+    var params: Dictionary<String, Any>?
+    // 处理事务
     var needSyncToDatabase: Bool!
 }
 
