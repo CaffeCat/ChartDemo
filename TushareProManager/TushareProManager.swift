@@ -181,6 +181,8 @@ class TushareProManager {
                 keysArray.append(str)
             }
             
+            
+            
             if let items = data["items"].array {
                 for item in items {
                     let item = item.array!
@@ -191,8 +193,9 @@ class TushareProManager {
                     }
                     let oc_dict = NSDictionary.init(objects: valuesArray, forKeys: keysArray as [NSCopying])
                     let newJson = JSON.init(oc_dict)
-                    print(newJson)
-                    
+                    //print(newJson)
+                    //stockListObject = TushareProStockListModel(JSONString: newJson)
+//                    print(stockListObject)
                 }
             }
         }
