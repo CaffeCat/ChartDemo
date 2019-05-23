@@ -192,6 +192,7 @@ class TushareProManager {
                     let oc_dict = NSDictionary.init(objects: valuesArray, forKeys: keysArray as [NSCopying])
                     let newJson = JSON.init(oc_dict)
                     print(newJson)
+                    
                 }
             }
         }

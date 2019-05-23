@@ -8,7 +8,7 @@
 
 import Foundation
 
-let NULL_DATA = "NULL"
+let NULL_DATA = "NULL_DEFAULT"
 
 // MARK: TusharePro 提供的功能接口
 enum TushareProAPI {
