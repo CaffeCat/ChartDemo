@@ -181,7 +181,8 @@ class TushareProManager {
                 keysArray.append(str)
             }
             
-            
+            var stockList = TushareProStockListClass.init()
+            var times:Int = 0 //统计执行次数
             
             if let items = data["items"].array {
                 for item in items {
@@ -192,10 +193,10 @@ class TushareProManager {
                         valuesArray.append(str ?? NULL_DATA)
                     }
                     let oc_dict = NSDictionary.init(objects: valuesArray, forKeys: keysArray as [NSCopying])
-                    let newJson = JSON.init(oc_dict)
-                    //print(newJson)
-                    //stockListObject = TushareProStockListModel(JSONString: newJson)
-//                    print(stockListObject)
+                    
+                    stockList = TushareProStockListClass(JSON: oc_dict as! [String : Any]) ?? stockList
+                    times += 1
+                    print( times, stockList)
                 }
             }
         }
