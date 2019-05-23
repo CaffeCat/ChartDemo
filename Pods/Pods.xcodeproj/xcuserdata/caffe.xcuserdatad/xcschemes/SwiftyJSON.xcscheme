@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D7FF9B15AFD2B9CA9E1E9181F6DAC550"
-               BuildableName = "Pods_ChartDemoUITests.framework"
-               BlueprintName = "Pods-ChartDemoUITests"
+               BlueprintIdentifier = "D118A6A04828FD3CDA8640CD2B6796D2"
+               BuildableName = "SwiftyJSON.framework"
+               BlueprintName = "SwiftyJSON"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D7FF9B15AFD2B9CA9E1E9181F6DAC550"
-            BuildableName = "Pods_ChartDemoUITests.framework"
-            BlueprintName = "Pods-ChartDemoUITests"
+            BlueprintIdentifier = "D118A6A04828FD3CDA8640CD2B6796D2"
+            BuildableName = "SwiftyJSON.framework"
+            BlueprintName = "SwiftyJSON"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

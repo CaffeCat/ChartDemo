@@ -8,6 +8,8 @@
 
 import Foundation
 
+let NULL_DATA = "NULL"
+
 // MARK: TusharePro 提供的功能接口
 enum TushareProAPI {
     case TushareProStockList //股票列表数据

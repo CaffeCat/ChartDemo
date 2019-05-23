@@ -7,6 +7,7 @@ target 'ChartDemo' do
   pod 'Charts'
   pod 'RealmSwift'
   pod 'Alamofire' #, '~> 5.0.0-beta.6'
+  pod 'SwiftyJSON'
   # Pods for ChartDemo
 
   target 'ChartDemoTests' do
@@ -15,6 +16,7 @@ target 'ChartDemo' do
     pod 'Charts'
     pod 'RealmSwift'
     pod 'Alamofire' #, '~> 5.0.0-beta.6'
+    pod 'SwiftyJSON'
     # Pods for testing
   end
 
@@ -24,6 +26,7 @@ target 'ChartDemo' do
     pod 'Charts'
     pod 'RealmSwift'
     pod 'Alamofire' #, '~> 5.0.0-beta.6'
+    pod 'SwiftyJSON'
     # Pods for testing
   end
 

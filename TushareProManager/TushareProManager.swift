@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 enum FetchTimeout: Int {
     case FetchTimeoutShort = 1
@@ -64,7 +65,7 @@ class TushareProManager {
                 
             default:
                 
-                //TODO: need to do something.
+                // need to do something?
                 result = false
                 print("There are someting needs to do.")
                 
@@ -104,8 +105,14 @@ class TushareProManager {
                                 if response.result.isSuccess {
                                     semaphore.signal()
                                     print("数据响应: \(String(describing: response.data))")
+                                    
                                     if let data = response.data {
-                                        self.parseDataFromTusharePro(data: data, request: request)
+                                        
+                                        let json = try! JSON.init(data: data)
+                                        //print("SwiftyJson 成功解析数据", json)
+                                        
+                                        self.parseJSONFromTusharePro(json: json, request: request)
+                                        //self.parseDataFromTusharePro(data: data, request: request)
                                     }
                                 }
             }
@@ -122,7 +129,7 @@ class TushareProManager {
         return false
     }
     
-    // MARK: 通用数据解析
+    // MARK: 通用数据解析 -- Data 途径
     private class func parseDataFromTusharePro(data: Data, request: TushareProRequestData) {
         
         if let dict  = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers){
@@ -135,7 +142,7 @@ class TushareProManager {
             if let data = json["data"] as? Dictionary<String, Any> {
                 
                 if let fields = data["fields"] as? Array<String> {
-                    //TODO: 可能需要写入数据库前进行字段对比
+                    // 可能需要写入数据库前进行字段对比
                     // 这里拿到 TusharePro 返回的字段列表
                     print("fields:", fields)
                 }
@@ -143,7 +150,7 @@ class TushareProManager {
                 if let items = data["items"] as? Array<Any> {
                     for item in items {
                         if let content = item as? Array<Any> {
-                            //TODO: 可能需要将数据写入数据库
+                            // 可能需要将数据写入数据库
                             // 这里拿到 TusharePro 返回的数据
                             print(content)
                         }
@@ -151,6 +158,48 @@ class TushareProManager {
                 }
             }
         }
+    }
+    
+    // MARK: 通用数据解析 -- JSON 途径
+    private class func parseJSONFromTusharePro(json: JSON, request: TushareProRequestData) {
+        
+        let request_id = json["request_id"].string!
+        let code = json["code"].int!
+        let msg = json["msg"].string  //这个值可能为空
+        
+        print("request_id: ", request_id)
+        
+        if code == 0 && msg == nil {
+            
+            let data = json["data"] //数据
+            let fields = data["fields"].array! //字段
+            
+            //构建字典键值数组
+            var keysArray: Array<String> = Array.init()
+            for item in fields {
+                let str = item.string!
+                keysArray.append(str)
+            }
+            
+            if let items = data["items"].array {
+                for item in items {
+                    let item = item.array!
+                    var valuesArray: Array<String> = Array.init()
+                    for value in item {
+                        let str = value.string
+                        valuesArray.append(str ?? NULL_DATA)
+                    }
+                    let oc_dict = NSDictionary.init(objects: valuesArray, forKeys: keysArray as [NSCopying])
+                    let newJson = JSON.init(oc_dict)
+                    print(newJson)
+                }
+            }
+        }
+    }
+    
+    // MARK: 解析数据转JSON -- 给 Data 途径使用
+    private class func formatJsonFromParseData(fields: Array<String>, data: [[Any]]){
+    
     }
     
     // MARK: - 内部私有获取数据方法
