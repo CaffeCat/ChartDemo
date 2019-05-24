@@ -24,7 +24,7 @@ enum TushareProAPI {
 class TushareProRequestData {
     
     // 接口名称
-    var apiName: TushareProAPI!
+    var apiType: TushareProAPI!
     // 参数设置
     var api: String!
     var apiURL: URL!

@@ -181,22 +181,55 @@ class TushareProManager {
                 keysArray.append(str)
             }
             
-            var stockList = TushareProStockListClass.init()
+            
             var times:Int = 0 //统计执行次数
             
             if let items = data["items"].array {
+                if items.isEmpty {
+                    print("items 数组没有数据", items)
+                    return
+                }
                 for item in items {
                     let item = item.array!
                     var valuesArray: Array<String> = Array.init()
                     for value in item {
-                        let str = value.string
-                        valuesArray.append(str ?? NULL_DATA)
+                        if let str = value.string{
+                            valuesArray.append(str)
+                            continue
+                        }
+                        //print(value, value.type)
+                        if let intStr = value.float{
+                            valuesArray.append(String(intStr))
+                            continue
+                        }
+                        valuesArray.append(NULL_DATA)
                     }
                     let oc_dict = NSDictionary.init(objects: valuesArray, forKeys: keysArray as [NSCopying])
                     
-                    stockList = TushareProStockListClass(JSON: oc_dict as! [String : Any]) ?? stockList
                     times += 1
-                    print( times, stockList)
+                    
+                    switch request.apiType!{
+                    case .TushareProStockList:
+                        let stockList = TushareProStockListClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProStockListClass.init()
+                        print(times, stockList)
+                    case .TushareProTradeCalendar:
+                        let calendar = TushareProTradeCalendarClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProTradeCalendarClass.init()
+                        print(times, calendar)
+                    case .TushareProStockCompany:
+                        let company = TushareProStockCompanyClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProStockCompanyClass.init()
+                        print(times, company)
+                    case .TushareProHistoryName:
+                        let historyName = TushareProHistoryNameClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProHistoryNameClass.init()
+                        print(times, historyName)
+                    case .TushareProConstituentStocksOfHS:
+                        let constituentStocksOfHS = TushareProConstituentStocksOfHSClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProConstituentStocksOfHSClass.init()
+                        print(times, constituentStocksOfHS)
+                    case .TushareProNewShareStocks:
+                        let newShareStocks = TushareProNewShareStocksClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProNewShareStocksClass.init()
+                        print(newShareStocks)
+                    default:
+                        print("something needs to do?")
+                    }
                 }
             }
         }
@@ -219,7 +252,7 @@ class TushareProManager {
         let params = ["list_status":"L"]
         
         let request = TushareProRequestData.init()
-        request.apiName = .TushareProStockList
+        request.apiType = .TushareProStockList
         request.api = api
         request.apiURL = tushareProURL
         request.fields = fields
@@ -239,7 +272,7 @@ class TushareProManager {
         let params = ["exchange": "SSE", "start_date": "20180101", "end_date": "20191231"]
         
         let request = TushareProRequestData.init()
-        request.apiName = .TushareProStockList
+        request.apiType = .TushareProTradeCalendar
         request.api = api
         request.apiURL = tushareProURL
         request.fields = fields
@@ -259,7 +292,7 @@ class TushareProManager {
         let params = ["":""]
         
         let request = TushareProRequestData.init()
-        request.apiName = .TushareProStockList
+        request.apiType = .TushareProStockCompany
         request.api = api
         request.apiURL = tushareProURL
         request.fields = fields
@@ -276,10 +309,10 @@ class TushareProManager {
         let tushareProURL = URL.init(string: TUSHARE_PRO_URL)!
         let api = "namechange"
         let fields = "ts_code, name, start_date, end_date, ann_date, change_reason"
-        let params = ["ts_code": "000001"]
+        let params = ["": ""]
         
         let request = TushareProRequestData.init()
-        request.apiName = .TushareProStockList
+        request.apiType = .TushareProHistoryName
         request.api = api
         request.apiURL = tushareProURL
         request.fields = fields
@@ -299,7 +332,7 @@ class TushareProManager {
         let params = ["hs_type": "SH"] // ["hs_type": "SZ"]
         
         let request = TushareProRequestData.init()
-        request.apiName = .TushareProStockList
+        request.apiType = .TushareProConstituentStocksOfHS
         request.api = api
         request.apiURL = tushareProURL
         request.fields = fields
@@ -319,7 +352,7 @@ class TushareProManager {
         let params = ["": ""] // ["hs_type": "SZ"]
         
         let request = TushareProRequestData.init()
-        request.apiName = .TushareProStockList
+        request.apiType = .TushareProNewShareStocks
         request.api = api
         request.apiURL = tushareProURL
         request.fields = fields
