@@ -19,5 +19,12 @@
             }
         }
 }
+
+### 第三方框架的使用情况: 
+Charts: 显示图像
+RealmSwift: 数据库
+Alamofire: 请求 TusharePro 数据
+SwiftyJSON : 将 Alamofire 返回数据 JSON 化读取
+ObjectMapper: 将字典结构数据转化成 RealmObject 对象
     
         
