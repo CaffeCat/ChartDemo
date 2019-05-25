@@ -17,9 +17,10 @@
 		89629D5B2275EEC2002175A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89629D592275EEC2002175A7 /* LaunchScreen.storyboard */; };
 		89629D662275EEC2002175A7 /* ChartDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89629D652275EEC2002175A7 /* ChartDemoTests.swift */; };
 		89629D712275EEC2002175A7 /* ChartDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89629D702275EEC2002175A7 /* ChartDemoUITests.swift */; };
-		899A0231229707FB0026B07B /* TuhareProBasicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A0230229707FB0026B07B /* TuhareProBasicData.swift */; };
-		899A0232229707FB0026B07B /* TuhareProBasicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A0230229707FB0026B07B /* TuhareProBasicData.swift */; };
-		899A0233229707FB0026B07B /* TuhareProBasicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A0230229707FB0026B07B /* TuhareProBasicData.swift */; };
+		899A0231229707FB0026B07B /* TuhareProBasicDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A0230229707FB0026B07B /* TuhareProBasicDataModel.swift */; };
+		899A0232229707FB0026B07B /* TuhareProBasicDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A0230229707FB0026B07B /* TuhareProBasicDataModel.swift */; };
+		899A0233229707FB0026B07B /* TuhareProBasicDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A0230229707FB0026B07B /* TuhareProBasicDataModel.swift */; };
+		899A02352298EC2A0026B07B /* RealmDataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A02342298EC2A0026B07B /* RealmDataBaseManager.swift */; };
 		8F02062B872E2A063C8F3107 /* Pods_ChartDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA758DCEF8CCBA46F40A2D16 /* Pods_ChartDemoUITests.framework */; };
 		D4174A8822939BBF00696DBC /* TushareConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4174A8722939BBF00696DBC /* TushareConstants.swift */; };
 		D4174A8922939BBF00696DBC /* TushareConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4174A8722939BBF00696DBC /* TushareConstants.swift */; };
@@ -67,7 +68,8 @@
 		89629D6C2275EEC2002175A7 /* ChartDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChartDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		89629D702275EEC2002175A7 /* ChartDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDemoUITests.swift; sourceTree = "<group>"; };
 		89629D722275EEC2002175A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		899A0230229707FB0026B07B /* TuhareProBasicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuhareProBasicData.swift; sourceTree = "<group>"; };
+		899A0230229707FB0026B07B /* TuhareProBasicDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuhareProBasicDataModel.swift; sourceTree = "<group>"; };
+		899A02342298EC2A0026B07B /* RealmDataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataBaseManager.swift; sourceTree = "<group>"; };
 		AE97E958C7DC9C789A12B3CB /* Pods-ChartDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChartDemo.debug.xcconfig"; path = "Target Support Files/Pods-ChartDemo/Pods-ChartDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		CA758DCEF8CCBA46F40A2D16 /* Pods_ChartDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChartDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4094246228D63AF00AC05BE /* TushareProManager.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TushareProManager.md; sourceTree = "<group>"; };
@@ -176,7 +178,8 @@
 				D4094246228D63AF00AC05BE /* TushareProManager.md */,
 				D4174A8722939BBF00696DBC /* TushareConstants.swift */,
 				D4174A8B22939E3600696DBC /* TushareProManager.swift */,
-				899A0230229707FB0026B07B /* TuhareProBasicData.swift */,
+				899A0230229707FB0026B07B /* TuhareProBasicDataModel.swift */,
+				899A02342298EC2A0026B07B /* RealmDataBaseManager.swift */,
 			);
 			path = TushareProManager;
 			sourceTree = "<group>";
@@ -452,7 +455,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				89629D532275EEC1002175A7 /* ViewController.swift in Sources */,
-				899A0231229707FB0026B07B /* TuhareProBasicData.swift in Sources */,
+				899A0231229707FB0026B07B /* TuhareProBasicDataModel.swift in Sources */,
+				899A02352298EC2A0026B07B /* RealmDataBaseManager.swift in Sources */,
 				D4174A8822939BBF00696DBC /* TushareConstants.swift in Sources */,
 				D4174A8C22939E3600696DBC /* TushareProManager.swift in Sources */,
 				89629D512275EEC1002175A7 /* AppDelegate.swift in Sources */,
@@ -464,7 +468,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4174A8922939BBF00696DBC /* TushareConstants.swift in Sources */,
-				899A0232229707FB0026B07B /* TuhareProBasicData.swift in Sources */,
+				899A0232229707FB0026B07B /* TuhareProBasicDataModel.swift in Sources */,
 				D4174A8D22939E3600696DBC /* TushareProManager.swift in Sources */,
 				89629D662275EEC2002175A7 /* ChartDemoTests.swift in Sources */,
 			);
@@ -475,7 +479,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4174A8A22939BBF00696DBC /* TushareConstants.swift in Sources */,
-				899A0233229707FB0026B07B /* TuhareProBasicData.swift in Sources */,
+				899A0233229707FB0026B07B /* TuhareProBasicDataModel.swift in Sources */,
 				D4174A8E22939E3600696DBC /* TushareProManager.swift in Sources */,
 				89629D712275EEC2002175A7 /* ChartDemoUITests.swift in Sources */,
 			);
@@ -638,7 +642,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TFN6MQ6M96;
+				DEVELOPMENT_TEAM = VTK2KVKN72;
 				INFOPLIST_FILE = ChartDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -657,7 +661,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TFN6MQ6M96;
+				DEVELOPMENT_TEAM = VTK2KVKN72;
 				INFOPLIST_FILE = ChartDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

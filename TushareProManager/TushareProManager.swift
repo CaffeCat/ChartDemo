@@ -209,26 +209,26 @@ class TushareProManager {
                     times += 1
                     
                     switch request.apiType!{
-                    case .TushareProStockList:
-                        let stockList = TushareProStockListClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProStockListClass.init()
-                        print(times, stockList)
-                    case .TushareProTradeCalendar:
-                        let calendar = TushareProTradeCalendarClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProTradeCalendarClass.init()
-                        print(times, calendar)
-                    case .TushareProStockCompany:
-                        let company = TushareProStockCompanyClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProStockCompanyClass.init()
-                        print(times, company)
-                    case .TushareProHistoryName:
-                        let historyName = TushareProHistoryNameClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProHistoryNameClass.init()
-                        print(times, historyName)
-                    case .TushareProConstituentStocksOfHS:
-                        let constituentStocksOfHS = TushareProConstituentStocksOfHSClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProConstituentStocksOfHSClass.init()
-                        print(times, constituentStocksOfHS)
-                    case .TushareProNewShareStocks:
-                        let newShareStocks = TushareProNewShareStocksClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProNewShareStocksClass.init()
-                        print(newShareStocks)
-                    default:
-                        print("something needs to do?")
+                        case .TushareProStockList:
+                            let stockList = TushareProStockListClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProStockListClass.init()
+                            print(times, stockList)
+                        case .TushareProTradeCalendar:
+                            let calendar = TushareProTradeCalendarClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProTradeCalendarClass.init()
+                            print(times, calendar)
+                        case .TushareProStockCompany:
+                            let company = TushareProStockCompanyClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProStockCompanyClass.init()
+                            print(times, company)
+                        case .TushareProHistoryName:
+                            let historyName = TushareProHistoryNameClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProHistoryNameClass.init()
+                            print(times, historyName)
+                        case .TushareProConstituentStocksOfHS:
+                            let constituentStocksOfHS = TushareProConstituentStocksOfHSClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProConstituentStocksOfHSClass.init()
+                            print(times, constituentStocksOfHS)
+                        case .TushareProNewShareStocks:
+                            let newShareStocks = TushareProNewShareStocksClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProNewShareStocksClass.init()
+                            print(newShareStocks)
+                        default:
+                            print("something needs to do?")
                     }
                 }
             }

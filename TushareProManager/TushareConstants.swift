@@ -9,6 +9,7 @@
 import Foundation
 
 let NULL_DATA = "NULL_DEFAULT"
+let SCHEMA_VERSION:UInt64 = 0
 
 // MARK: TusharePro 提供的功能接口
 enum TushareProAPI {
@@ -26,11 +27,12 @@ class TushareProRequestData {
     // 接口名称
     var apiType: TushareProAPI!
     // 参数设置
-    var api: String!
-    var apiURL: URL!
-    var fields: String!
-    var params: Dictionary<String, Any>!
+    var api: String! //传给 TusharePro 的请求函数名称
+    var apiURL: URL! // TusharePro 的网址
+    var fields: String! //需要 TusharePro 返回的字段
+    var params: Dictionary<String, Any>! //发送给 TusharePro 的JSON参数
     // 处理事务
-    var needSyncToDatabase: Bool!
+    var needSyncToDatabase: Bool! //是否需要同步数据库
+    var dataBaseName = NULL_DATA //需要指定的数据库名称
 }
 
