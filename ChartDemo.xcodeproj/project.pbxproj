@@ -11,6 +11,9 @@
 		204B0C26A4CD7F6940115F17 /* Pods_ChartDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66BD3DEE843B32537A1C8984 /* Pods_ChartDemo.framework */; };
 		89048EF522999F1400700513 /* RealmDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A0236229980460026B07B /* RealmDatabaseManager.swift */; };
 		89048EF622999F1F00700513 /* RealmDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A0236229980460026B07B /* RealmDatabaseManager.swift */; };
+		89048EF8229B0F2B00700513 /* TushareProStockMarketDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89048EF7229B0F2B00700513 /* TushareProStockMarketDataModel.swift */; };
+		89048EF9229B0F3800700513 /* TushareProStockMarketDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89048EF7229B0F2B00700513 /* TushareProStockMarketDataModel.swift */; };
+		89048EFA229B0F4100700513 /* TushareProStockMarketDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89048EF7229B0F2B00700513 /* TushareProStockMarketDataModel.swift */; };
 		893A7D7F2276006A00F0BF40 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 893A7D7E2276006A00F0BF40 /* Charts.framework */; };
 		89629D512275EEC1002175A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89629D502275EEC1002175A7 /* AppDelegate.swift */; };
 		89629D532275EEC1002175A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89629D522275EEC1002175A7 /* ViewController.swift */; };
@@ -56,6 +59,7 @@
 		66BD3DEE843B32537A1C8984 /* Pods_ChartDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChartDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83A784082A2819BE7152FCF3 /* Pods-ChartDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChartDemo.release.xcconfig"; path = "Target Support Files/Pods-ChartDemo/Pods-ChartDemo.release.xcconfig"; sourceTree = "<group>"; };
 		8875D126F62972FE5EB5E8D5 /* Pods_ChartDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChartDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		89048EF7229B0F2B00700513 /* TushareProStockMarketDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TushareProStockMarketDataModel.swift; sourceTree = "<group>"; };
 		893A7D7E2276006A00F0BF40 /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89629D4D2275EEC1002175A7 /* ChartDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChartDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89629D502275EEC1002175A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 				D4174A8B22939E3600696DBC /* TushareProManager.swift */,
 				899A0230229707FB0026B07B /* TuhareProBasicDataModel.swift */,
 				899A0236229980460026B07B /* RealmDatabaseManager.swift */,
+				89048EF7229B0F2B00700513 /* TushareProStockMarketDataModel.swift */,
 			);
 			path = TushareProManager;
 			sourceTree = "<group>";
@@ -459,6 +464,7 @@
 				89629D532275EEC1002175A7 /* ViewController.swift in Sources */,
 				899A0231229707FB0026B07B /* TuhareProBasicDataModel.swift in Sources */,
 				D4174A8822939BBF00696DBC /* TushareConstants.swift in Sources */,
+				89048EF8229B0F2B00700513 /* TushareProStockMarketDataModel.swift in Sources */,
 				D4174A8C22939E3600696DBC /* TushareProManager.swift in Sources */,
 				899A0237229980460026B07B /* RealmDatabaseManager.swift in Sources */,
 				89629D512275EEC1002175A7 /* AppDelegate.swift in Sources */,
@@ -469,6 +475,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89048EF9229B0F3800700513 /* TushareProStockMarketDataModel.swift in Sources */,
 				89048EF522999F1400700513 /* RealmDatabaseManager.swift in Sources */,
 				D4174A8922939BBF00696DBC /* TushareConstants.swift in Sources */,
 				899A0232229707FB0026B07B /* TuhareProBasicDataModel.swift in Sources */,
@@ -481,6 +488,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89048EFA229B0F4100700513 /* TushareProStockMarketDataModel.swift in Sources */,
 				89048EF622999F1F00700513 /* RealmDatabaseManager.swift in Sources */,
 				D4174A8A22939BBF00696DBC /* TushareConstants.swift in Sources */,
 				899A0233229707FB0026B07B /* TuhareProBasicDataModel.swift in Sources */,
