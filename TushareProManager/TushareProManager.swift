@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import RealmSwift
 
 enum FetchTimeout: Int {
     case FetchTimeoutShort = 1
@@ -181,56 +182,100 @@ class TushareProManager {
                 keysArray.append(str)
             }
             
-            
-            var times:Int = 0 //统计执行次数
-            
             if let items = data["items"].array {
                 if items.isEmpty {
                     print("items 数组没有数据", items)
                     return
                 }
-                for item in items {
-                    let item = item.array!
-                    var valuesArray: Array<String> = Array.init()
-                    for value in item {
-                        if let str = value.string{
-                            valuesArray.append(str)
-                            continue
+                
+                do {
+                    print(Date.timeIntervalSinceReferenceDate)
+                    let config = RealmDatabaseManager.getRealmConfig(request: request)
+                    let realm = try Realm.init(configuration: config)
+                    realm.beginWrite()
+                    for item in items{
+                        let item = item.array!
+                        var valuesArray: Array<String> = Array.init()
+                        for value in item {
+                            if let str = value.string{
+                                valuesArray.append(str)
+                                continue
+                            }
+                            //print(value, value.type)
+                            if let intStr = value.float{
+                                valuesArray.append(String(intStr))
+                                continue
+                            }
+                            valuesArray.append(NULL_DATA)
                         }
-                        //print(value, value.type)
-                        if let intStr = value.float{
-                            valuesArray.append(String(intStr))
-                            continue
+                        let oc_dict = NSDictionary.init(objects: valuesArray, forKeys: keysArray as [NSCopying])
+                        
+                        
+                        switch request.apiType!{
+                            case .TushareProStockList:
+                                realm.create(TushareProStockListClass.self, value: oc_dict, update: true)
+                            case .TushareProTradeCalendar:
+                                realm.create(TushareProTradeCalendarClass.self, value: oc_dict, update: true)
+                            case .TushareProStockCompany:
+                                realm.create(TushareProStockCompanyClass.self, value: oc_dict, update: true)
+                            case .TushareProHistoryName:
+                                realm.create(TushareProHistoryNameClass.self, value: oc_dict, update: true)
+                            case .TushareProConstituentStocksOfHS:
+                                realm.create(TushareProConstituentStocksOfHSClass.self, value: oc_dict, update: true)
+                            case .TushareProNewShareStocks:
+                                realm.create(TushareProNewShareStocksClass.self, value: oc_dict, update: true)
+                            default:
+                                print("something needs to do?")
                         }
-                        valuesArray.append(NULL_DATA)
                     }
-                    let oc_dict = NSDictionary.init(objects: valuesArray, forKeys: keysArray as [NSCopying])
-                    
-                    times += 1
-                    
-                    switch request.apiType!{
-                        case .TushareProStockList:
-                            let stockList = TushareProStockListClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProStockListClass.init()
-                            print(times, stockList)
-                        case .TushareProTradeCalendar:
-                            let calendar = TushareProTradeCalendarClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProTradeCalendarClass.init()
-                            print(times, calendar)
-                        case .TushareProStockCompany:
-                            let company = TushareProStockCompanyClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProStockCompanyClass.init()
-                            print(times, company)
-                        case .TushareProHistoryName:
-                            let historyName = TushareProHistoryNameClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProHistoryNameClass.init()
-                            print(times, historyName)
-                        case .TushareProConstituentStocksOfHS:
-                            let constituentStocksOfHS = TushareProConstituentStocksOfHSClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProConstituentStocksOfHSClass.init()
-                            print(times, constituentStocksOfHS)
-                        case .TushareProNewShareStocks:
-                            let newShareStocks = TushareProNewShareStocksClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProNewShareStocksClass.init()
-                            print(newShareStocks)
-                        default:
-                            print("something needs to do?")
-                    }
+                    try realm.commitWrite()
+                    print(Date.timeIntervalSinceReferenceDate)
+                }catch let error{
+                    print(error)
                 }
+                
+//                for item in items {
+//                    let item = item.array!
+//                    var valuesArray: Array<String> = Array.init()
+//                    for value in item {
+//                        if let str = value.string{
+//                            valuesArray.append(str)
+//                            continue
+//                        }
+//                        //print(value, value.type)
+//                        if let intStr = value.float{
+//                            valuesArray.append(String(intStr))
+//                            continue
+//                        }
+//                        valuesArray.append(NULL_DATA)
+//                    }
+//                    let oc_dict = NSDictionary.init(objects: valuesArray, forKeys: keysArray as [NSCopying])
+//
+//                    times += 1
+//
+//                    switch request.apiType!{
+//                        case .TushareProStockList:
+//                            let stockList = TushareProStockListClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProStockListClass.init()
+//                            print(times, stockList)
+//                        case .TushareProTradeCalendar:
+//                            let calendar = TushareProTradeCalendarClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProTradeCalendarClass.init()
+//                            print(times, calendar)
+//                        case .TushareProStockCompany:
+//                            let company = TushareProStockCompanyClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProStockCompanyClass.init()
+//                            print(times, company)
+//                        case .TushareProHistoryName:
+//                            let historyName = TushareProHistoryNameClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProHistoryNameClass.init()
+//                            print(times, historyName)
+//                        case .TushareProConstituentStocksOfHS:
+//                            let constituentStocksOfHS = TushareProConstituentStocksOfHSClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProConstituentStocksOfHSClass.init()
+//                            print(times, constituentStocksOfHS)
+//                        case .TushareProNewShareStocks:
+//                            let newShareStocks = TushareProNewShareStocksClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProNewShareStocksClass.init()
+//                            print(newShareStocks)
+//                        default:
+//                            print("something needs to do?")
+//                    }
+//                }
             }
         }
     }
@@ -289,7 +334,7 @@ class TushareProManager {
         let tushareProURL = URL.init(string: TUSHARE_PRO_URL)!
         let api = "stock_company"
         let fields = "ts_code, exchange, chairman, manager, secretary, reg_capital, setup_date, province, city, introduction, website, email, office, employees, main_business, business_scope"
-        let params = ["":""]
+        let params = ["exchange":"SZSE"] //交易所代码 ，SSE上交所 SZSE深交所 ，默认SSE
         
         let request = TushareProRequestData.init()
         request.apiType = .TushareProStockCompany

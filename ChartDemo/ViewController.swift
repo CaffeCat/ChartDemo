@@ -31,8 +31,8 @@ class ViewController: UIViewController, ChartViewDelegate {
         
         DispatchQueue.global().async {
 //            _ = TushareProManager.fetchData(type: .TushareProStockList)
-            _ = TushareProManager.fetchData(type: .TushareProTradeCalendar)
-//            _ = TushareProManager.fetchData(type: .TushareProStockCompany, requestData: nil)
+//            _ = TushareProManager.fetchData(type: .TushareProTradeCalendar)
+            _ = TushareProManager.fetchData(type: .TushareProStockCompany)
 //            _ = TushareProManager.fetchData(type: .TushareProHistoryName)
 //            _ = TushareProManager.fetchData(type: .TushareProConstituentStocksOfHS)
 //            _ = TushareProManager.fetchData(type: .TushareProNewShareStocks)

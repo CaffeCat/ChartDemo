@@ -9,7 +9,11 @@
 import Foundation
 import RealmSwift
 
-class DataBaseManager {
+class TestClass {
+    var name = NULL_DATA
+}
+
+class RealmDatabaseManager {
     
     //MARK: 对 Realm 数据父目录关闭系统文件保护
     ///防止设备锁定时, 系统自动对该目录进行数据加密
@@ -84,7 +88,6 @@ class DataBaseManager {
             try realm.write {
                 realm.add(data, update: true)
             }
-            try realm.commitWrite()
         } catch let error {
             print("Something wrong happens in", #function, error)
         }
