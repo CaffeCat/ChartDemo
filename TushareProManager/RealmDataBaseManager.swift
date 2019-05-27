@@ -54,7 +54,17 @@ class RealmDatabaseManager {
             case .TushareProConstituentStocksOfHS:
                 suffixName = "TushareProConstituentStocksOfHS"
                 objectType = TushareProConstituentStocksOfHSClass.self
+            case .TushareProMarketData:
+                if request.isTscodeForPrimaryKey {
+                    suffixName = "\(request.marketDataType)TushareProMarketDataOfTs_code"
+                    objectType = TushareProMarketDataClassOfStock.self
+                }else{
+                    suffixName = "\(request.marketDataType)TushareProMarketDataOfDate"
+                    objectType = TushareProMarketDataClassOfDate.self
+                }
             default:
+                //FIXME: 不能走到这里来
+                objectType = TushareProStockListClass.self
                 suffixName = "default.realm"
                 print(#function , "But something needs to do?")
         }

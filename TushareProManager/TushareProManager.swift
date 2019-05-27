@@ -64,6 +64,9 @@ class TushareProManager {
                 result = self.fetchNewShareStocks()
                 semaphore.signal()
                 
+            case .TushareProMarketData:
+                result = self.fetchMarketData(type: .daily)
+                semaphore.signal()
             default:
                 
                 // need to do something?
@@ -208,8 +211,7 @@ class TushareProManager {
                             }
                             valuesArray.append(NULL_DATA)
                         }
-                        let oc_dict = NSDictionary.init(objects: valuesArray, forKeys: keysArray as [NSCopying])
-                        
+                        let oc_dict = NSMutableDictionary.init(objects: valuesArray, forKeys: keysArray as [NSCopying])
                         
                         switch request.apiType!{
                             case .TushareProStockList:
@@ -224,6 +226,15 @@ class TushareProManager {
                                 realm.create(TushareProConstituentStocksOfHSClass.self, value: oc_dict, update: true)
                             case .TushareProNewShareStocks:
                                 realm.create(TushareProNewShareStocksClass.self, value: oc_dict, update: true)
+                            case .TushareProMarketData:
+                                oc_dict["marketDataType"] = request.marketDataType
+                                if request.isTscodeForPrimaryKey {
+                                    //以股票代码为主键值
+                                    realm.create(TushareProMarketDataClassOfStock.self, value: oc_dict, update: true)
+                                }else{
+                                    //以日期为主键值
+                                    realm.create(TushareProMarketDataClassOfDate.self, value: oc_dict, update: true)
+                                }
                             default:
                                 print("something needs to do?")
                         }
@@ -233,56 +244,8 @@ class TushareProManager {
                 }catch let error{
                     print(error)
                 }
-                
-//                for item in items {
-//                    let item = item.array!
-//                    var valuesArray: Array<String> = Array.init()
-//                    for value in item {
-//                        if let str = value.string{
-//                            valuesArray.append(str)
-//                            continue
-//                        }
-//                        //print(value, value.type)
-//                        if let intStr = value.float{
-//                            valuesArray.append(String(intStr))
-//                            continue
-//                        }
-//                        valuesArray.append(NULL_DATA)
-//                    }
-//                    let oc_dict = NSDictionary.init(objects: valuesArray, forKeys: keysArray as [NSCopying])
-//
-//                    times += 1
-//
-//                    switch request.apiType!{
-//                        case .TushareProStockList:
-//                            let stockList = TushareProStockListClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProStockListClass.init()
-//                            print(times, stockList)
-//                        case .TushareProTradeCalendar:
-//                            let calendar = TushareProTradeCalendarClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProTradeCalendarClass.init()
-//                            print(times, calendar)
-//                        case .TushareProStockCompany:
-//                            let company = TushareProStockCompanyClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProStockCompanyClass.init()
-//                            print(times, company)
-//                        case .TushareProHistoryName:
-//                            let historyName = TushareProHistoryNameClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProHistoryNameClass.init()
-//                            print(times, historyName)
-//                        case .TushareProConstituentStocksOfHS:
-//                            let constituentStocksOfHS = TushareProConstituentStocksOfHSClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProConstituentStocksOfHSClass.init()
-//                            print(times, constituentStocksOfHS)
-//                        case .TushareProNewShareStocks:
-//                            let newShareStocks = TushareProNewShareStocksClass.init(JSON: oc_dict as! [String : Any]) ?? TushareProNewShareStocksClass.init()
-//                            print(newShareStocks)
-//                        default:
-//                            print("something needs to do?")
-//                    }
-//                }
             }
         }
-    }
-    
-    // MARK: 解析数据转JSON -- 给 Data 途径使用
-    private class func formatJsonFromParseData(fields: Array<String>, data: [[Any]]){
-    
     }
     
     // MARK: - 内部私有获取数据方法
@@ -406,5 +369,35 @@ class TushareProManager {
         
         return self.getDataFromTusharePro(request: request)
     }
+    
+    //MARK: 日线/周线/月线 行情数据
+    private class func fetchMarketData(type: MarketDataType) -> Bool {
+        
+        let tushareProURl = URL.init(string:  TUSHARE_PRO_URL)!
+        var api = NULL_DATA
+        switch type {
+        case .daily:
+            api = "daily"
+        case .weekly:
+            api = "weekly"
+        case .monthly:
+            api = "monthly"
+        }
+        let fields = "ts_code, trade_date, open, high, low, close, pre_close, change, pct_chg, vol, amount"
+        let params = ["ts_code":"000001.SZ"]
+        
+        let request = TushareProRequestData.init()
+        request.apiType = .TushareProMarketData
+        request.api = api
+        request.apiURL = tushareProURl
+        request.fields = fields
+        request.params = params
+        // 行情数据额外字段
+        request.marketDataType = type.rawValue
+        
+        return self.getDataFromTusharePro(request: request)
+    }
+    
+    // MARK: 复权因子
     
 }

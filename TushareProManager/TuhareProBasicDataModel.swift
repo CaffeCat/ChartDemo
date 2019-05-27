@@ -1,7 +1,7 @@
 //
 //  TushareProBasicData.swift
 //  ChartDemo
-//
+//  TusharePro 基础数据
 //  Created by Weibin Wu on 24/5/2019.
 //  Copyright © 2019 Weibin Wu. All rights reserved.
 //
