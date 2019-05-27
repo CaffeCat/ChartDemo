@@ -36,37 +36,64 @@ class RealmDatabaseManager {
         
         var suffixName:String
         switch request.apiType! {
-            case .TushareProStockList:
-                suffixName = "TushareProStockList"
-                objectType = TushareProStockListClass.self
-            case .TushareProHistoryName:
-                suffixName = "TushareProHistoryName"
-                objectType = TushareProHistoryNameClass.self
-            case .TushareProStockCompany:
-                suffixName = "TushareProStockCompany"
-                objectType = TushareProStockCompanyClass.self
-            case .TushareProTradeCalendar:
-                suffixName = "TushareProTradeCalendar"
-                objectType = TushareProTradeCalendarClass.self
-            case .TushareProNewShareStocks:
-                suffixName = "TushareProNewShareStocks"
-                objectType = TushareProNewShareStocksClass.self
-            case .TushareProConstituentStocksOfHS:
-                suffixName = "TushareProConstituentStocksOfHS"
-                objectType = TushareProConstituentStocksOfHSClass.self
-            case .TushareProMarketData:
-                if request.isTscodeForPrimaryKey {
-                    suffixName = "\(request.marketDataType)TushareProMarketDataOfTs_code"
-                    objectType = TushareProMarketDataClassOfStock.self
-                }else{
-                    suffixName = "\(request.marketDataType)TushareProMarketDataOfDate"
-                    objectType = TushareProMarketDataClassOfDate.self
-                }
-            default:
-                //FIXME: 不能走到这里来
-                objectType = TushareProStockListClass.self
-                suffixName = "default.realm"
-                print(#function , "But something needs to do?")
+        case .TushareProStockList:
+            suffixName = "TushareProStockList"
+            objectType = TushareProStockListClass.self
+        case .TushareProHistoryName:
+            suffixName = "TushareProHistoryName"
+            objectType = TushareProHistoryNameClass.self
+        case .TushareProStockCompany:
+            suffixName = "TushareProStockCompany"
+            objectType = TushareProStockCompanyClass.self
+        case .TushareProTradeCalendar:
+            suffixName = "TushareProTradeCalendar"
+            objectType = TushareProTradeCalendarClass.self
+        case .TushareProNewShareStocks:
+            suffixName = "TushareProNewShareStocks"
+            objectType = TushareProNewShareStocksClass.self
+        case .TushareProConstituentStocksOfHS:
+            suffixName = "TushareProConstituentStocksOfHS"
+            objectType = TushareProConstituentStocksOfHSClass.self
+        case .TushareProMarketData:
+            if request.isTscodeForPrimaryKey {
+                suffixName = "\(request.marketDataType)TushareProMarketDataOfTs_code"
+                objectType = TushareProMarketDataClassOfTs_codePrimaryKey.self
+            }else{
+                suffixName = "\(request.marketDataType)TushareProMarketDataOfDate"
+                objectType = TushareProMarketDataClassOfDatePrimaryKey.self
+            }
+        case .TushareProAdjustedFactor:
+            if request.isTscodeForPrimaryKey {
+                suffixName = "TushareProAdjustedFactorClassOfTs_codePrimaryKey"
+                objectType = TushareProAdjustedFactorClassOfTs_codePrimaryKey.self
+            }else{
+                suffixName = "TushareProAdjustedFactorClassOfDatePrimaryKey"
+                objectType = TushareProAdjustedFactorClassOfDatePrimaryKey.self
+            }
+        case .TushareProSuspend:
+            suffixName = "TushareProSuspendClass"
+            objectType = TushareProSuspendClass.self
+        case .TushareProDailyIndication:
+            if request.isTscodeForPrimaryKey {
+                suffixName = "TushareProDailyIndicationOfTs_codePrimaryKey"
+                objectType = TushareProDailyIndicationClassOfTs_codePrimaryKey.self
+            }else{
+                suffixName = "TushareProDailyIndicationOfDatePrimaryKey"
+                objectType = TushareProDailyIndicationClassOfDatePrimaryKey.self
+            }
+        case .TushareProMoneyFlow:
+            if request.isTscodeForPrimaryKey {
+                suffixName = "TushareProMoneyFlowClassOfTs_codePrimaryKey"
+                objectType = TushareProMoneyFlowClassOfTs_codePrimaryKey.self
+            }else{
+                suffixName = "TushareProMoneyFlowClass"
+                objectType = TushareProMoneyFlowClassOfDate.self
+            }
+        default:
+            //FIXME: 不能走到这里来
+            objectType = TushareProStockListClass.self
+            suffixName = "default.realm"
+            print(#function , "But something needs to do?")
         }
         
         if request.dataBaseName != NULL_DATA{

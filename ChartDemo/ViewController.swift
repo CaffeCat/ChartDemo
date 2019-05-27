@@ -36,7 +36,12 @@ class ViewController: UIViewController, ChartViewDelegate {
 //            _ = TushareProManager.fetchData(type: .TushareProHistoryName)
 //            _ = TushareProManager.fetchData(type: .TushareProConstituentStocksOfHS)
 //            _ = TushareProManager.fetchData(type: .TushareProNewShareStocks)
-            _ = TushareProManager.fetchData(type: .TushareProMarketData)
+//            _ = TushareProManager.fetchData(type: .TushareProMarketData)
+//            _ = TushareProManager.fetchData(type: .TushareProAdjustedFactor)
+//            _ = TushareProManager.fetchData(type: .TushareProSuspend)
+//            _ = TushareProManager.fetchData(type: .TushareProDailyIndication)
+            _ = TushareProManager.fetchData(type: .TushareProMoneyFlow)
+            
         }
     }
 

@@ -65,8 +65,30 @@ class TushareProManager {
                 semaphore.signal()
                 
             case .TushareProMarketData:
+                
                 result = self.fetchMarketData(type: .daily)
                 semaphore.signal()
+                
+            case .TushareProAdjustedFactor:
+                
+                result = self.fetchAdjustedFactor()
+                semaphore.signal()
+                
+            case .TushareProSuspend:
+                
+                result = self.fetchSuspend()
+                semaphore.signal()
+                
+            case .TushareProDailyIndication:
+                
+                result = self.fetchDailyIndication()
+                semaphore.signal()
+                
+            case .TushareProMoneyFlow:
+                
+                result = self.fetchMoneyFlow()
+                semaphore.signal()
+                
             default:
                 
                 // need to do something?
@@ -214,29 +236,49 @@ class TushareProManager {
                         let oc_dict = NSMutableDictionary.init(objects: valuesArray, forKeys: keysArray as [NSCopying])
                         
                         switch request.apiType!{
-                            case .TushareProStockList:
-                                realm.create(TushareProStockListClass.self, value: oc_dict, update: true)
-                            case .TushareProTradeCalendar:
-                                realm.create(TushareProTradeCalendarClass.self, value: oc_dict, update: true)
-                            case .TushareProStockCompany:
-                                realm.create(TushareProStockCompanyClass.self, value: oc_dict, update: true)
-                            case .TushareProHistoryName:
-                                realm.create(TushareProHistoryNameClass.self, value: oc_dict, update: true)
-                            case .TushareProConstituentStocksOfHS:
-                                realm.create(TushareProConstituentStocksOfHSClass.self, value: oc_dict, update: true)
-                            case .TushareProNewShareStocks:
-                                realm.create(TushareProNewShareStocksClass.self, value: oc_dict, update: true)
-                            case .TushareProMarketData:
-                                oc_dict["marketDataType"] = request.marketDataType
-                                if request.isTscodeForPrimaryKey {
-                                    //以股票代码为主键值
-                                    realm.create(TushareProMarketDataClassOfStock.self, value: oc_dict, update: true)
-                                }else{
-                                    //以日期为主键值
-                                    realm.create(TushareProMarketDataClassOfDate.self, value: oc_dict, update: true)
-                                }
-                            default:
-                                print("something needs to do?")
+                        case .TushareProStockList:
+                            realm.create(TushareProStockListClass.self, value: oc_dict, update: true)
+                        case .TushareProTradeCalendar:
+                            realm.create(TushareProTradeCalendarClass.self, value: oc_dict, update: true)
+                        case .TushareProStockCompany:
+                            realm.create(TushareProStockCompanyClass.self, value: oc_dict, update: true)
+                        case .TushareProHistoryName:
+                            realm.create(TushareProHistoryNameClass.self, value: oc_dict, update: true)
+                        case .TushareProConstituentStocksOfHS:
+                            realm.create(TushareProConstituentStocksOfHSClass.self, value: oc_dict, update: true)
+                        case .TushareProNewShareStocks:
+                            realm.create(TushareProNewShareStocksClass.self, value: oc_dict, update: true)
+                        case .TushareProMarketData:
+                            oc_dict["marketDataType"] = request.marketDataType
+                            if request.isTscodeForPrimaryKey {
+                                //以股票代码为主键值
+                                realm.create(TushareProMarketDataClassOfTs_codePrimaryKey.self, value: oc_dict, update: true)
+                            }else{
+                                //以日期为主键值
+                                realm.create(TushareProMarketDataClassOfDatePrimaryKey.self, value: oc_dict, update: true)
+                            }
+                        case .TushareProAdjustedFactor:
+                            if request.isTscodeForPrimaryKey {
+                                realm.create(TushareProAdjustedFactorClassOfTs_codePrimaryKey.self, value: oc_dict, update: true)
+                            }else{
+                                realm.create(TushareProAdjustedFactorClassOfDatePrimaryKey.self, value: oc_dict, update: true)
+                            }
+                        case .TushareProSuspend:
+                            realm.create(TushareProSuspendClass.self, value: oc_dict, update: true)
+                        case .TushareProDailyIndication:
+                            if request.isTscodeForPrimaryKey {
+                                realm.create(TushareProDailyIndicationClassOfTs_codePrimaryKey.self, value: oc_dict, update: true)
+                            }else{
+                                realm.create(TushareProDailyIndicationClassOfDatePrimaryKey.self, value: oc_dict, update: true)
+                            }
+                        case .TushareProMoneyFlow:
+                            if request.isTscodeForPrimaryKey {
+                                realm.create(TushareProMoneyFlowClassOfTs_codePrimaryKey, value: oc_dict, update: true)
+                            }else{
+                                realm.create(TushareProMoneyFlowClassOfDatePrimaryKey.self, value: oc_dict, update: true)
+                            }
+                        default:
+                            print("something needs to do?")
                         }
                     }
                     try realm.commitWrite()
@@ -394,10 +436,86 @@ class TushareProManager {
         request.params = params
         // 行情数据额外字段
         request.marketDataType = type.rawValue
+        request.isTscodeForPrimaryKey = false
         
         return self.getDataFromTusharePro(request: request)
     }
     
     // MARK: 复权因子
+    private class func fetchAdjustedFactor() -> Bool {
+        
+        let tushareProURl = URL.init(string:  TUSHARE_PRO_URL)!
+        let api = "adj_factor"
+        let fields = "ts_code, trade_date, adj_factor"
+        let params = ["ts_code": "000001.SZ"]
+        
+        let request = TushareProRequestData.init()
+        request.apiType = .TushareProAdjustedFactor
+        request.api = api
+        request.apiURL = tushareProURl
+        request.fields = fields
+        request.params = params
+        //行情数据额外字段
+        request.isTscodeForPrimaryKey = false
+        
+        return self.getDataFromTusharePro(request: request)
+    }
     
+    //mARK: 停复牌信息
+    private class func fetchSuspend() -> Bool {
+        
+        let tushareProURl = URL.init(string:  TUSHARE_PRO_URL)!
+        let api = "suspend"
+        let fields = "ts_code, suspend_date, resume_date, ann_date, suspend_reason, reason_type"
+        let params = ["ts_code": "000001.SZ"]
+        
+        let request = TushareProRequestData.init()
+        request.apiType = .TushareProSuspend
+        request.api = api
+        request.apiURL = tushareProURl
+        request.fields = fields
+        request.params = params
+        
+        return self.getDataFromTusharePro(request: request)
+    }
+    
+    //MARK: 每日指标
+    private class func fetchDailyIndication() -> Bool {
+        
+        let tushareProURl = URL.init(string:  TUSHARE_PRO_URL)!
+        let api = "daily_basic"
+        let fields = "ts_code, trade_date, close, turnover_rate, turnover_rate_f, volume_ratio, pe, pe_ttm, pb, ps, ps_ttm, total_share, float_share, free_share, total_mv, circ_mv"
+        let params = ["ts_code": "000001.SZ"]
+        
+        let request = TushareProRequestData.init()
+        request.apiType = .TushareProDailyIndication
+        request.api = api
+        request.apiURL = tushareProURl
+        request.fields = fields
+        request.params = params
+        //行情数据额外字段
+        request.isTscodeForPrimaryKey = false
+        
+        return self.getDataFromTusharePro(request: request)
+    }
+    
+    //MARK: 个股资金流向
+    private class func fetchMoneyFlow() -> Bool {
+        
+        let tushareProURl = URL.init(string:  TUSHARE_PRO_URL)!
+        let api = "moneyflow"
+        let fields = "ts_code, trade_date, buy_sm_vol, buy_sm_amount,  sell_sm_vol, sell_sm_amount, buy_md_vol, buy_md_amount, sell_md_vol, sell_md_amount, buy_lg_vol, buy_lg_amount, sell_lg_vol, sell_lg_amount, buy_elg_vol, buy_elg_amount, sell_elg_vol, sell_elg_amount, net_mf_vol, net_mf_amount"
+        let params = ["ts_code": "000001.SZ"]
+        
+        let request = TushareProRequestData.init()
+        request.apiType = .TushareProMoneyFlow
+        request.api = api
+        request.apiURL = tushareProURl
+        request.fields = fields
+        request.params = params
+        //行情数据额外字段
+        request.isTscodeForPrimaryKey = false
+        
+        return self.getDataFromTusharePro(request: request)
+    }
 }
