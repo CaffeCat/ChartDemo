@@ -76,7 +76,7 @@ class RealmDatabaseManager {
         case .TushareProDailyIndication:
             if request.isTscodeForPrimaryKey {
                 suffixName = "TushareProDailyIndicationOfTs_codePrimaryKey"
-                objectType = TushareProDailyIndicationClassOfTs_codePrimaryKey.self
+                objectType = TushareProDailyIndicatorClassOfTs_codePrimaryKey.self
             }else{
                 suffixName = "TushareProDailyIndicationOfDatePrimaryKey"
                 objectType = TushareProDailyIndicationClassOfDatePrimaryKey.self

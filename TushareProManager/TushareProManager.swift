@@ -267,7 +267,7 @@ class TushareProManager {
                             realm.create(TushareProSuspendClass.self, value: oc_dict, update: true)
                         case .TushareProDailyIndication:
                             if request.isTscodeForPrimaryKey {
-                                realm.create(TushareProDailyIndicationClassOfTs_codePrimaryKey.self, value: oc_dict, update: true)
+                                realm.create(TushareProDailyIndicatorClassOfTs_codePrimaryKey.self, value: oc_dict, update: true)
                             }else{
                                 realm.create(TushareProDailyIndicationClassOfDatePrimaryKey.self, value: oc_dict, update: true)
                             }

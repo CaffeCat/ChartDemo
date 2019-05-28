@@ -671,3 +671,284 @@ class TushareProCashFlowSheetClass: Object, Mappable {
         ts_code     <- map["update_flag"]
     }
 }
+
+//MARK: 业绩预告
+class TushareProForecastClass: Object, Mappable {
+    
+    @objc dynamic var ts_code: String = NULL_DATA //TusharePro股票代码 -- 这个值是唯一的, 可作为主键
+    @objc dynamic var ann_date: String = NULL_DATA //公告日期
+    @objc dynamic var end_date: String = NULL_DATA //报告期
+    @objc dynamic var type: String = NULL_DATA //业绩预告类型(预增/预减/扭亏/首亏/续亏/续盈/略增/略减)
+    @objc dynamic var p_change_min: String = NULL_DATA //预告净利润变动幅度下限（%）
+    @objc dynamic var p_change_max: String = NULL_DATA //预告净利润变动幅度上限（%）
+    @objc dynamic var net_profit_min: String = NULL_DATA //预告净利润下限（万元）
+    @objc dynamic var net_profit_max: String = NULL_DATA //预告净利润上限（万元）
+    @objc dynamic var last_parent_net: String = NULL_DATA //上年同期归属母公司净利润
+    @objc dynamic var first_ann_date: String = NULL_DATA //首次公告日
+    @objc dynamic var summary: String = NULL_DATA //业绩预告摘要
+    @objc dynamic var change_reason: String = NULL_DATA //业绩变动原因
+    
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    //MARK: Realm 数据库配置
+    
+    //设置主键
+    override class func primaryKey() -> String? {
+        return "trade_date"
+    }
+    //设置索引
+    override static func indexedProperties() -> [String] {
+        return ["ts_code", "trade_date", "turnover_rate", "turnover_rate_f", "volume_ratio", "pe", "pe_ttm", "pb", "ps", "ps_ttm"]
+    }
+    
+    //MARK:遵守 Mappable 协议
+    func mapping(map: Map) {
+        ts_code         <- map["ts_code"]
+        ann_date        <- map["ann_date"]
+        end_date        <- map["end_date"]
+        type            <- map["type"]
+        p_change_min    <- map["p_change_min"]
+        p_change_max    <- map["p_change_max"]
+        net_profit_min  <- map["net_profit_min"]
+        net_profit_max  <- map["net_profit_max"]
+        last_parent_net <- map["last_parent_net"]
+        first_ann_date  <- map["first_ann_date"]
+        summary         <- map["summary"]
+        change_reason   <- map["change_reason"]
+    }
+}
+
+//MARK:
+class TushareProExpressClass: Object, Mappable {
+    
+    @objc dynamic var ts_code: String = NULL_DATA //TusharePro股票代码 -- 这个值是唯一的, 可作为主键
+    @objc dynamic var ann_date: String = NULL_DATA //公告日期
+    @objc dynamic var end_date: String = NULL_DATA //报告期
+    @objc dynamic var revenue: String = NULL_DATA //营业收入(元)
+    @objc dynamic var operate_profit: String = NULL_DATA //营业利润(元)
+    @objc dynamic var total_profit: String = NULL_DATA //利润总额(元)
+    @objc dynamic var n_income: String = NULL_DATA //净利润(元)
+    @objc dynamic var total_assets: String = NULL_DATA //总资产(元)
+    @objc dynamic var total_hldr_eqy_exc_min_int: String = NULL_DATA //股东权益合计(不含少数股东权益)(元)
+    @objc dynamic var diluted_eps: String = NULL_DATA //每股收益(摊薄)(元)
+    @objc dynamic var diluted_roe: String = NULL_DATA //净资产收益率(摊薄)(%)
+    @objc dynamic var yoy_net_profit: String = NULL_DATA //去年同期修正后净利润
+    @objc dynamic var bps: String = NULL_DATA //每股净资产
+    @objc dynamic var yoy_sales: String = NULL_DATA //同比增长率:营业收入
+    @objc dynamic var yoy_op: String = NULL_DATA //同比增长率:营业利润
+    @objc dynamic var yoy_tp: String = NULL_DATA //同比增长率:利润总额
+    @objc dynamic var yoy_dedu_np: String = NULL_DATA //同比增长率:归属母公司股东的净利润
+    @objc dynamic var yoy_eps: String = NULL_DATA //同比增长率:基本每股收益
+    @objc dynamic var yoy_roe: String = NULL_DATA //同比增减:加权平均净资产收益率
+    @objc dynamic var growth_assets: String = NULL_DATA //比年初增长率:总资产
+    @objc dynamic var yoy_equity: String = NULL_DATA //比年初增长率:归属母公司的股东权益
+    @objc dynamic var growth_bps: String = NULL_DATA //比年初增长率:归属于母公司股东的每股净资产
+    @objc dynamic var or_last_year: String = NULL_DATA //去年同期营业收入
+    @objc dynamic var op_last_year: String = NULL_DATA //去年同期营业利润
+    @objc dynamic var tp_last_year: String = NULL_DATA //去年同期利润总额
+    @objc dynamic var np_last_year: String = NULL_DATA //去年同期净利润
+    @objc dynamic var eps_last_year: String = NULL_DATA //去年同期每股收益
+    @objc dynamic var open_net_assets: String = NULL_DATA //期初净资产
+    @objc dynamic var open_bps: String = NULL_DATA //期初每股净资产
+    @objc dynamic var perf_summary: String = NULL_DATA //业绩简要说明
+    @objc dynamic var is_audit: String = NULL_DATA //是否审计： 1是 0否
+    @objc dynamic var remark: String = NULL_DATA //备注
+    
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    //MARK: Realm 数据库配置
+    
+    //设置主键
+    override class func primaryKey() -> String? {
+        return "trade_date"
+    }
+    //设置索引
+    override static func indexedProperties() -> [String] {
+        return ["ts_code", "trade_date", "turnover_rate", "turnover_rate_f", "volume_ratio", "pe", "pe_ttm", "pb", "ps", "ps_ttm"]
+    }
+    
+    //MARK:遵守 Mappable 协议
+    func mapping(map: Map) {
+        ts_code         <- map["ts_code"]
+        ann_date        <- map["ann_date"]
+        end_date        <- map["end_date"]
+        revenue         <- map["revenue"]
+        operate_profit  <- map["operate_profit"]
+        total_profit    <- map["total_profit"]
+        n_income        <- map["n_income"]
+        total_assets    <- map["total_assets"]
+        total_hldr_eqy_exc_min_int <- map["total_hldr_eqy_exc_min_int"]
+        diluted_eps     <- map["diluted_eps"]
+        diluted_roe     <- map["diluted_roe"]
+        yoy_net_profit  <- map["yoy_net_profit"]
+        bps             <- map["bps"]
+        yoy_sales       <- map["yoy_sales"]
+        yoy_op          <- map["yoy_op"]
+        yoy_tp          <- map["yoy_tp"]
+        yoy_dedu_np     <- map["yoy_dedu_np"]
+        yoy_eps         <- map["yoy_eps"]
+        yoy_roe         <- map["yoy_roe"]
+        growth_assets   <- map["growth_assets"]
+        yoy_equity      <- map["yoy_equity"]
+        growth_bps      <- map["growth_bps"]
+        or_last_year    <- map["or_last_year"]
+        op_last_year    <- map["op_last_year"]
+        tp_last_year    <- map["tp_last_year"]
+        np_last_year    <- map["np_last_year"]
+        eps_last_year   <- map["eps_last_year"]
+        open_net_assets <- map["open_net_assets"]
+        open_bps        <- map["open_bps"]
+        perf_summary    <- map["perf_summary"]
+        is_audit        <- map["is_audit"]
+        remark          <- map["remark"]
+    }
+}
+
+//MARK: 分红送股
+class TushareProDividendClass: Object, Mappable {
+    
+    @objc dynamic var ts_code: String = NULL_DATA //TS代码
+    @objc dynamic var end_date: String = NULL_DATA //分红年度
+    @objc dynamic var ann_date: String = NULL_DATA //预案公告日
+    @objc dynamic var div_proc: String = NULL_DATA //实施进度
+    @objc dynamic var stk_div: String = NULL_DATA //每股送转
+    @objc dynamic var stk_bo_rate: String = NULL_DATA //每股送股比例
+    @objc dynamic var stk_co_rate: String = NULL_DATA //每股转增比例
+    @objc dynamic var cash_div: String = NULL_DATA //每股分红（税后）
+    @objc dynamic var cash_div_tax: String = NULL_DATA //每股分红（税前）
+    @objc dynamic var record_date: String = NULL_DATA //股权登记日
+    @objc dynamic var ex_date: String = NULL_DATA //除权除息日
+    @objc dynamic var pay_date: String = NULL_DATA //派息日
+    @objc dynamic var div_listdate: String = NULL_DATA //红股上市日
+    @objc dynamic var imp_ann_date: String = NULL_DATA //实施公告日
+    @objc dynamic var base_date: String = NULL_DATA //基准日
+    @objc dynamic var base_share: String = NULL_DATA //基准股本（万）
+    
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    //MARK: Realm 数据库配置
+    
+    //设置主键
+    override class func primaryKey() -> String? {
+        return "trade_date"
+    }
+    //设置索引
+    override static func indexedProperties() -> [String] {
+        return ["ts_code", "trade_date", "turnover_rate", "turnover_rate_f", "volume_ratio", "pe", "pe_ttm", "pb", "ps", "ps_ttm"]
+    }
+    
+    //MARK:遵守 Mappable 协议
+    func mapping(map: Map) {
+        ts_code     <- map["ts_code"]
+        end_date    <- map["end_date"]
+        ann_date    <- map["ann_date"]
+        div_proc    <- map["div_proc"]
+        stk_div     <- map["stk_div"]
+        stk_bo_rate <- map["stk_bo_rate"]
+        stk_co_rate <- map["stk_co_rate"]
+        cash_div    <- map["cash_div"]
+        cash_div_tax <- map["cash_div_tax"]
+        record_date  <- map["record_date"]
+        ex_date     <- map["ex_date"]
+        pay_date    <- map["pay_date"]
+        div_listdate <- map["div_listdate"]
+        imp_ann_date <- map["imp_ann_date"]
+        base_date  <- map["base_date"]
+        base_share <- map["base_share"]
+    }
+}
+
+//MARK: 财务指标数据
+class TushareProFinancialIndicatorClass: Object, Mappable {
+    
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    //MARK: Realm 数据库配置
+    
+    //设置主键
+    override class func primaryKey() -> String? {
+        return "trade_date"
+    }
+    //设置索引
+    override static func indexedProperties() -> [String] {
+        return ["ts_code", "trade_date", "turnover_rate", "turnover_rate_f", "volume_ratio", "pe", "pe_ttm", "pb", "ps", "ps_ttm"]
+    }
+    
+    //MARK:遵守 Mappable 协议
+    func mapping(map: Map) {
+    }
+}
+
+//MARK: 财务审计意见
+class TushareProFinancialAuditClass: Object, Mappable {
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    //MARK: Realm 数据库配置
+    
+    //设置主键
+    override class func primaryKey() -> String? {
+        return "trade_date"
+    }
+    //设置索引
+    override static func indexedProperties() -> [String] {
+        return ["ts_code", "trade_date", "turnover_rate", "turnover_rate_f", "volume_ratio", "pe", "pe_ttm", "pb", "ps", "ps_ttm"]
+    }
+    
+    //MARK:遵守 Mappable 协议
+    func mapping(map: Map) {
+    }
+}
+
+//MARK: 主营业务构成
+class TushareProFinancialMainbzClass: Object, Mappable {
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    //MARK: Realm 数据库配置
+    
+    //设置主键
+    override class func primaryKey() -> String? {
+        return "trade_date"
+    }
+    //设置索引
+    override static func indexedProperties() -> [String] {
+        return ["ts_code", "trade_date", "turnover_rate", "turnover_rate_f", "volume_ratio", "pe", "pe_ttm", "pb", "ps", "ps_ttm"]
+    }
+    
+    //MARK:遵守 Mappable 协议
+    func mapping(map: Map) {
+    }
+}
+
+//MARK: 财报披露计划
+class TushareProDisclosureDateClass: Object, Mappable {
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    //MARK: Realm 数据库配置
+    
+    //设置主键
+    override class func primaryKey() -> String? {
+        return "trade_date"
+    }
+    //设置索引
+    override static func indexedProperties() -> [String] {
+        return ["ts_code", "trade_date", "turnover_rate", "turnover_rate_f", "volume_ratio", "pe", "pe_ttm", "pb", "ps", "ps_ttm"]
+    }
+    
+    //MARK:遵守 Mappable 协议
+    func mapping(map: Map) {
+    }
+}

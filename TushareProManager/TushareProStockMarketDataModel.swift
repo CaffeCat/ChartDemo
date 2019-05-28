@@ -206,7 +206,7 @@ class TushareProSuspendClass: Object, Mappable {
 
 //MARK: 每日指标
 //以股票代码为主键值, 查询每日指标历史数据
-class TushareProDailyIndicationClassOfTs_codePrimaryKey: Object, Mappable {
+class TushareProDailyIndicatorClassOfTs_codePrimaryKey: Object, Mappable {
     
     @objc dynamic var ts_code: String = NULL_DATA //TusharePro股票代码 -- 这个值是唯一的, 可作为主键
     @objc dynamic var trade_date: String = NULL_DATA //交易日期
