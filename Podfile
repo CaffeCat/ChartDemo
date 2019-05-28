@@ -9,6 +9,7 @@ target 'ChartDemo' do
   pod 'Alamofire' #, '~> 5.0.0-beta.6'
   pod 'SwiftyJSON'
   pod 'ObjectMapper'
+  pod 'SnapKit'
   # Pods for ChartDemo
 
   target 'ChartDemoTests' do
@@ -19,6 +20,7 @@ target 'ChartDemo' do
     pod 'Alamofire' #, '~> 5.0.0-beta.6'
     pod 'SwiftyJSON'
     pod 'ObjectMapper'
+    pod 'SnapKit'
     # Pods for testing
   end
 
@@ -30,6 +32,7 @@ target 'ChartDemo' do
     pod 'Alamofire' #, '~> 5.0.0-beta.6'
     pod 'SwiftyJSON'
     pod 'ObjectMapper'
+    pod 'SnapKit'
     # Pods for testing
   end
 

@@ -273,7 +273,7 @@ class TushareProManager {
                             }
                         case .TushareProMoneyFlow:
                             if request.isTscodeForPrimaryKey {
-                                realm.create(TushareProMoneyFlowClassOfTs_codePrimaryKey, value: oc_dict, update: true)
+                                realm.create(TushareProMoneyFlowClassOfTs_codePrimaryKey.self, value: oc_dict, update: true)
                             }else{
                                 realm.create(TushareProMoneyFlowClassOfDatePrimaryKey.self, value: oc_dict, update: true)
                             }

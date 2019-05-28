@@ -87,7 +87,7 @@ class RealmDatabaseManager {
                 objectType = TushareProMoneyFlowClassOfTs_codePrimaryKey.self
             }else{
                 suffixName = "TushareProMoneyFlowClass"
-                objectType = TushareProMoneyFlowClassOfDate.self
+                objectType = TushareProMoneyFlowClassOfDatePrimaryKey.self
             }
         default:
             //FIXME: 不能走到这里来
